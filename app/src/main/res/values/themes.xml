@@ -13,4 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <!--new style is created here-->
+    <style name="navStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/fraunces_thin</item>
+    </style>
+
+    <!-- change color switch -->
+    <style name="switchOn">
+        <item name="colorControlActivated">#CCFF1236</item>
+    </style>
 </resources>

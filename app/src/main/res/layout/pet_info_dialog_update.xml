@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#FFE1E1"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp">
+
+    //id các bạn tự đặt nhóe do mình k biết mấy bạn đặt như nào :))
+    //đặt xong nhớ xóa 2 dòng này
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFE1E1"
+        android:padding="10dp">
+
+        <EditText
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+
+        <EditText
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

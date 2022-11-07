@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/petInfo"
+        android:title="Pet Info"
+        android:icon="@drawable/ic_petinfo"
+        android:iconTint="#B3FF1246"/>
+    <item
+        android:id="@+id/Remind"
+        android:title="Remind"
+        android:icon="@drawable/ic_remind"
+        android:iconTint="#B3FF1246"/>
+    <item
+        android:id="@+id/Spend"
+        android:title="Spend"
+        android:icon="@drawable/ic_spend"
+        android:iconTint="#B3FF1246"/>
+    <item
+        android:id="@+id/Support"
+        android:title="Support"
+        android:icon="@drawable/ic_support"
+        android:iconTint="#B3FF1246"/>
+</menu>
