@@ -15,7 +15,7 @@
         android:padding="10dp">
 
         <TextView
-
+            android:id="@+id/tvTenBenh"
             android:textSize="25dp"
             android:background="@drawable/rounded_corner"
             android:layout_width="match_parent"
@@ -24,21 +24,12 @@
             android:fontFamily="@font/fraunces"/>
 
         <TextView
-
+            android:id="@+id/tvNoiDung"
             android:textSize="25dp"
             android:background="@drawable/rounded_corner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:fontFamily="@font/fraunces"/>
-
-        <TextView
-
-            android:textSize="25dp"
-            android:background="@drawable/rounded_corner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:fontFamily="@font/fraunces"/>
 
     </LinearLayout>
