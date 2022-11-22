@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_button.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_remind.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/activity_main.xml" value="0.1308876811594203" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/remind_fragment.xml" value="0.2234375" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/spend_item.xml" value="0.2234375" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/drawable/ic_add.xml" value="0.1835" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/drawable/ic_delete.xml" value="0.1835" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/drawable/rounded_search.xml" value="0.1835" />
