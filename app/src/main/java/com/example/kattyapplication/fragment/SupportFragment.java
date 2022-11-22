@@ -84,6 +84,7 @@ public class SupportFragment extends Fragment {
 //    }
 
     public void CallApiSupportAll() {
+
         CallApi.callApi.getSupportAll().enqueue(new Callback<List<support>>() {
             @Override
             public void onResponse(Call<List<support>> call, Response<List<support>> response) {
