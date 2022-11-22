@@ -116,6 +116,8 @@ public class SupportFragment extends Fragment {
     }
 
     public void PostApiSupport() {
+
+        //trong dep trai
         String tentrieuChung = "bệnh viêm dạ dày ở chó";
         String noiDung = "-Nguyên nhân\n" +
                 "Do giun móc, virus parvo, virus gây bệnh care hoặc ăn phải thức ăn và nước uống có chứa vi khuẩn thương hàn (Salmonella), vi khuẩn yếm khí (Clostridium), vi khuẩn E.Coli,...\n" +
