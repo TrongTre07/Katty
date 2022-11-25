@@ -6,8 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +39,10 @@ public class RemindFragment extends Fragment {
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
     EditText edtContentRemind;
-    public static String content = "";
+    public static final String LAST_TEXT = "";
     TextView tvTime;
     Button btnSetAlarm, btnCancelAlarm;
+    String content;
 
     @Nullable
     @Override
@@ -47,7 +52,28 @@ public class RemindFragment extends Fragment {
         createNotificationChannel();
 
         edtContentRemind = view.findViewById(R.id.edtContentRemind);
-        content = edtContentRemind.getText().toString();
+
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        edtContentRemind.setText(pref.getString(LAST_TEXT, ""));
+        edtContentRemind.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                content = edtContentRemind.getText().toString();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                content = edtContentRemind.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                pref.edit().putString(LAST_TEXT, s.toString()).commit();
+                content = edtContentRemind.getText().toString();
+
+            }
+        });
 
         tvTime = view.findViewById(R.id.tvTime);
         btnSetAlarm = view.findViewById(R.id.btnSetAlarm);
@@ -77,9 +103,9 @@ public class RemindFragment extends Fragment {
         return view;
     }
 
-    public static String sendContent() {
-        return content;
-    }
+//    public static String sendContent() {
+//        return content;
+//    }
 
     private void cancelAlarm() {
 
