@@ -46,7 +46,6 @@ public class SpendFragment extends Fragment {
     ListView lvSpend;
     ArrayList<Spend> list;
     ArrayList<Infor_pet> listTC;
-    ArrayList<TieuDung> listTD;
     FloatingActionButton floatAdd;
     Button btnSum;
     Dialog dialog;

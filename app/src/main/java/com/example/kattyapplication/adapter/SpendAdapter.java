@@ -22,7 +22,6 @@ public class SpendAdapter extends ArrayAdapter<Spend> {
     private Context context;
     SpendFragment fragment;
     private ArrayList<Spend> list;
-    private ArrayList<TieuDung> listTD;
     TextView tvLoaiTD, tvGiatien, tvTenTC;
     ImageView ivDelete;
 
