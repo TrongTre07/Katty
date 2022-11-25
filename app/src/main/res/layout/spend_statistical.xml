@@ -24,15 +24,26 @@
             android:text="Statistical"
             android:textSize="25dp" />
 
-        <EditText
+        <TextView
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
             android:minHeight="48dp"
-            android:textSize="15dp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:id="@+id/tvSum"
+            android:fontFamily="@font/fraunces"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Cancel"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/tvCancelS"/>
 
     </LinearLayout>
 

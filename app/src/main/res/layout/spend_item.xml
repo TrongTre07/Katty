@@ -24,15 +24,17 @@
 
             <TextView
 
+                android:id="@+id/tvTenTC"
                 android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                android:fontFamily="@font/fraunces"/>
+                android:fontFamily="@font/fraunces"
+                />
 
             <TextView
-
+                android:id="@+id/tvLoaiTD"
                 android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
@@ -47,7 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:fontFamily="@font/fraunces"/>
+                android:fontFamily="@font/fraunces"
+                android:id="@+id/tvGiatien"/>
 
         </LinearLayout>
 
