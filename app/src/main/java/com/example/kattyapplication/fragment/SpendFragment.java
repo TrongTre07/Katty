@@ -54,7 +54,6 @@ public class SpendFragment extends Fragment {
     TextView tvLoaiTD, tvGiatien, tvTenTC;
     SpendAdapter adapter;
     Spend item;
-    ImageView ivDelete;
 
     @Nullable
     @Override
@@ -66,7 +65,6 @@ public class SpendFragment extends Fragment {
         tvTenTC = view.findViewById(R.id.tvTenTC);
         tvGiatien = view.findViewById(R.id.tvGiatien);
         tvLoaiTD = view.findViewById(R.id.tvLoaiTD);
-        ivDelete = view.findViewById(R.id.ivDelete);
 
         getlistPet();
         callApiSpend();
