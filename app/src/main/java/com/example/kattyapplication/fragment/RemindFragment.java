@@ -111,7 +111,7 @@ public class RemindFragment extends Fragment {
 
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
 
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
         if (alarmManager == null) {
             alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         }
