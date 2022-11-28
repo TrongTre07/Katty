@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#FFE1E1"
     android:layout_margin="5dp"
     app:cardCornerRadius="15dp">
 
-    //id các bạn tự đặt nhóe do mình k biết mấy bạn đặt như nào :))
-    //đặt xong nhớ xóa 2 dòng này
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +16,7 @@
         android:padding="10dp">
 
         <EditText
-
+            android:id="@+id/edNameUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -28,7 +26,7 @@
             android:textSize="25dp" />
 
         <EditText
-
+            android:id="@+id/edBreedsUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -36,7 +34,38 @@
             android:fontFamily="@font/fraunces"
             android:minHeight="48dp"
             android:textSize="25dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
+            <TextView
+                android:id="@+id/tvCancelUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:text="Cancel"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="5dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="48dp"
+                android:text="Update"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/tvCancelUpdate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

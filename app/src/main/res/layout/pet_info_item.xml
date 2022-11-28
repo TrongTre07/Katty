@@ -22,7 +22,7 @@
             android:padding="10dp">
 
             <TextView
-
+                android:id="@+id/tvName"
                 android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:fontFamily="@font/fraunces"/>
 
             <TextView
-
+                android:id="@+id/tvBreeds"
                 android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
@@ -40,13 +40,6 @@
                 android:fontFamily="@font/fraunces"/>
 
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/ivDelete"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"
-            android:src="@drawable/ic_delete" />
 
     </LinearLayout>
 
