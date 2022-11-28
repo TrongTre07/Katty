@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import com.example.kattyapplication.model.support;
 
 import java.util.ArrayList;
 
-public class supportAdapter extends ArrayAdapter<support> {
+public class supportAdapter extends ArrayAdapter<support> implements Filterable {
     private Context context;
     SupportFragment fragment;
     private ArrayList<support> list;

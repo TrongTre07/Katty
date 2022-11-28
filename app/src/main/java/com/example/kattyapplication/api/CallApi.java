@@ -1,4 +1,5 @@
 package com.example.kattyapplication.api;
+import com.example.kattyapplication.model.Message;
 import com.example.kattyapplication.model.SupportPost;
 import com.example.kattyapplication.model.support;
 import com.google.gson.Gson;
@@ -6,6 +7,8 @@ import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 import java.util.List;
+
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,6 +26,7 @@ public interface CallApi {
     Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
+
     CallApi callApi = new Retrofit.Builder()
             .baseUrl("https://trongtre.kynalab.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -33,12 +37,6 @@ public interface CallApi {
     @GET("api/Values/detail-support/{id}")
     Call <support> getSupportByID(@Path("id")  Integer id);
 
-    @POST("api/Values/add-support")
-    Call<SupportPost> createPost(@Body SupportPost supportPost);
-
-    @POST("api/Values/add-support")
-    Call<SupportPost> savePost(@Field("tenTrieuChung") String tenTrieuChung,
-                        @Field("noiDung") String noiDung);
 }
 
 

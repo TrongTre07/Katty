@@ -13,6 +13,7 @@ import com.example.kattyapplication.R;
 
 
 public class PetInfoFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -20,4 +21,5 @@ public class PetInfoFragment extends Fragment {
 
         return view;
     }
+
 }

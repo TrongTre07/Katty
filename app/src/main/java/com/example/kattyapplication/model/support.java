@@ -1,6 +1,7 @@
 package com.example.kattyapplication.model;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 public class support {
     private Integer id;
