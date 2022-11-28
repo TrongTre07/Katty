@@ -73,6 +73,8 @@ public class SupportFragment extends Fragment {
 //        CallApiSupportByID(1);
 //        SearchViewSupport();
 
+        //support task
+
         //bắt sự kiện khi click vào nút tìm kiếm
         editText.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
