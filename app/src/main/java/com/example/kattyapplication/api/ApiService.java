@@ -4,6 +4,8 @@ import com.example.kattyapplication.model.Infor_pet;
 import com.example.kattyapplication.model.SetlistSpend;
 import com.example.kattyapplication.model.Spend;
 import com.example.kattyapplication.model.TieuDung;
+import com.example.kattyapplication.model.Pet;
+import com.example.kattyapplication.model.PetInfo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -45,5 +47,16 @@ public interface ApiService {
 
     @POST("api/Values/delete-tieudung")
     Call<Message> deleteTieuDung (@Query("id") int id);
+    //https://trongtre.kynalab.com/api/values/all-information
+    @GET("api/Values/all-information")
+    Call<List<PetInfo>> getPetInfo();
+    @GET("api/Values/detail-information/{id}")
+    Call<List<PetInfo>> detailPetInfo() ;
+    @POST("api/Values/add-information")
+    Call<Message> addPetInfo(@Body Pet pet );
+    @POST("api/Values/change-information")
+    Call<Message> UpdatePetInfo(@Body PetInfo petInfo) ;
+    @POST("api/Values/delete-information")
+    Call<Message> DeletePetInfo(@Query("id")Integer Id);
 
 }
