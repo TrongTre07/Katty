@@ -11,23 +11,29 @@
         android:background="@drawable/rounded_search"
         android:layout_margin="10dp">
 
-        <ImageView
-
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.025"
-            android:src="@drawable/ic_search" />
-
         <EditText
-            android:layout_width="300dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:id="@+id/edtSearch"
+            android:layout_width="290dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_corner"
             android:layout_gravity="center"/>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/rounded_search"
+            android:src="@drawable/ic_search" />
+
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+
+
+    <ListView
+        android:id="@+id/viewSP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>
