@@ -57,7 +57,7 @@ public class PetInfoFragment extends Fragment {
         floatAdd = view.findViewById(R.id.floatAddPet);
         tvName = view.findViewById(R.id.tvName);
         tvBreeds = view.findViewById(R.id.tvBreeds);
-        ivDelete = view.findViewById(R.id.ivDelete);
+//        ivDelete = view.findViewById(R.id.);
 
         callApiPetInfo();
 

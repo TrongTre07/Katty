@@ -36,27 +36,32 @@ public interface ApiService {
     Call<List<Spend>> getSpend();
 
     @POST("api/Values/add-tieudung")
-    Call<Message> addSpend (@Body TieuDung tieuDung);
+    Call<Message> addSpend(@Body TieuDung tieuDung);
 
 
     @POST("api/Values/change-tieudung")
-    Call<Message> updateSpend (@Body SetlistSpend setlistSpend);
+    Call<Message> updateSpend(@Body SetlistSpend setlistSpend);
 
     @POST("api/Values/delete-tieudung")
     Call<Message> deleteSpend(@Body Integer id);
 
     @POST("api/Values/delete-tieudung")
-    Call<Message> deleteTieuDung (@Query("id") int id);
+    Call<Message> deleteTieuDung(@Query("id") int id);
+
     //https://trongtre.kynalab.com/api/values/all-information
     @GET("api/Values/all-information")
     Call<List<PetInfo>> getPetInfo();
+
     @GET("api/Values/detail-information/{id}")
-    Call<List<PetInfo>> detailPetInfo() ;
+    Call<List<PetInfo>> detailPetInfo();
+
     @POST("api/Values/add-information")
-    Call<Message> addPetInfo(@Body Pet pet );
+    Call<Message> addPetInfo(@Body Pet pet);
+
     @POST("api/Values/change-information")
-    Call<Message> UpdatePetInfo(@Body PetInfo petInfo) ;
+    Call<Message> UpdatePetInfo(@Body PetInfo petInfo);
+
     @POST("api/Values/delete-information")
-    Call<Message> DeletePetInfo(@Query("id")Integer Id);
+    Call<Message> DeletePetInfo(@Query("id") Integer Id);
 
 }
