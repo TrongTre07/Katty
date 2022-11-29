@@ -72,7 +72,7 @@ public class PetInfoFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 item = list.get(i);
-                Log.d("Item INforrrrr:", item.toString());
+//                Log.d("Item INforrrrr:", item.toString());
                 openDialogUpdate(getActivity(), item.getId());
 
                 return true;
@@ -83,7 +83,7 @@ public class PetInfoFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 item = list.get(i);
-                Log.d("Item INforrrrr:", item.toString());
+//                Log.d("Item INforrrrr:", item.toString());
                 xoa(item.getId());
             }
         });
@@ -104,7 +104,7 @@ public class PetInfoFragment extends Fragment {
             @Override
             public void onFailure(Call<List<PetInfo>> call, Throwable t) {
                 Log.d("Got Error:", t.toString());
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -144,21 +144,21 @@ public class PetInfoFragment extends Fragment {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
-                            Log.d("test",message.getId()+"");
+//                            Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                 //thanh cong
-                                Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "Thành Công", Toast.LENGTH_SHORT).show();
                                 callApiPetInfo();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Add Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Thất bại", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Thử lại nha", Toast.LENGTH_LONG).show();
                         }
                     });
                     dialog.dismiss();
@@ -205,21 +205,21 @@ public class PetInfoFragment extends Fragment {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
-                            Log.d("test",message.getId()+"");
+//                            Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                 //thanh cong
-                                Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
                                 callApiPetInfo();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Update Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Cập nhật lỗi rồi", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Cập nhật lỗi rồi", Toast.LENGTH_LONG).show();
                         }
                     });
                     dialog.dismiss();
@@ -243,16 +243,16 @@ public class PetInfoFragment extends Fragment {
                     public void onResponse(Call<Message> call, Response<Message> response) {
                         Message message = response.body();
                         if(message.getId() == 1){
-                            Toast.makeText(getContext(), "Delete successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_LONG).show();
                             callApiPetInfo();
                         }else{
-                            Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Không được", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Message> call, Throwable t) {
-                        Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Xóa không được", Toast.LENGTH_SHORT).show();
                     }
                 });
 

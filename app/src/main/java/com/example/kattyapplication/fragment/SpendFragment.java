@@ -87,7 +87,7 @@ public class SpendFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 item = list.get(i);
-                Log.d("Item INforrrrr:", item.toString());
+//                Log.d("Item INforrrrr:", item.toString());
                 openDialogUpdate(getActivity(), item.getId());
 
                 return true;
@@ -98,7 +98,7 @@ public class SpendFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 item = list.get(i);
-                Log.d("Item INforrrrr:", item.toString());
+//                Log.d("Item INforrrrr:", item.toString());
                 xoa(item.getId());
             }
         });
@@ -118,7 +118,7 @@ public class SpendFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Spend>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Lỗi rồi", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -153,7 +153,7 @@ public class SpendFragment extends Fragment {
                 if (validate() > 0) {
                     HashMap<String, Object> hsPet = (HashMap<String, Object>) spnTenTCAdd.getSelectedItem();
                     Integer idThuCung = (Integer) hsPet.get("id");
-                    Log.d("kjbjhbjhgjgjhbkjgjh", ""+idThuCung);
+//                    Log.d("kjbjhbjhgjgjhbkjgjh", ""+idThuCung);
                     item.setLoaiTieuDung(edtLoaiTD.getText().toString());
                     item.setGiaTien(Integer.parseInt(edtGiatien.getText().toString()));
                     TieuDung tieuDung = new TieuDung(item.getLoaiTieuDung(), item.getGiaTien(), idThuCung);
@@ -161,22 +161,22 @@ public class SpendFragment extends Fragment {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
-                            Log.d("test",message.getId()+"");
+//                            Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                //thanh cong
-                                Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
                                 callApiSpend();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Lỗi rồi", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
 
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(context, "Khong thanh cong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Lỗi rồi", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -220,31 +220,31 @@ public class SpendFragment extends Fragment {
                 if (validate() > 0) {
                     HashMap<String, Object> hsPet = (HashMap<String, Object>) spnTenTCUpdate.getSelectedItem();
                     Integer idThuCung = (Integer) hsPet.get("id");
-                    Log.d("idTC>>>>", ""+idThuCung);
+//                    Log.d("idTC>>>>", ""+idThuCung);
                     item.setLoaiTieuDung(edtLoaiTD.getText().toString());
                     item.setGiaTien(Integer.parseInt(edtGiatien.getText().toString()));
                     TieuDung tieuDung = new TieuDung(item.getLoaiTieuDung(), item.getGiaTien(), idThuCung);
                     SetlistSpend setlistSpend = new SetlistSpend(id, item.getLoaiTieuDung(), item.getGiaTien(), idThuCung );
-                    Log.d("SLDKFJSLDKFJDSLKFJDSLK", setlistSpend.toString());
+//                    Log.d("SLDKFJSLDKFJDSLKFJDSLK", setlistSpend.toString());
                     ApiService.apiService.updateSpend(setlistSpend).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
-                            Log.d("test",message.getId()+"");
+//                            Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                 //thanh cong
-                                Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
                                 callApiSpend();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Update Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Cập nhật lỗi rồi", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Lỗi rồi", Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -323,16 +323,16 @@ public class SpendFragment extends Fragment {
                     public void onResponse(Call<Message> call, Response<Message> response) {
                         Message message = response.body();
                         if(message.getId() == 1){
-                            Toast.makeText(getContext(), "Delete successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Xóa thành công rồi", Toast.LENGTH_LONG).show();
                             callApiSpend();
                         }else{
-                            Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Không xóa được", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Message> call, Throwable t) {
-                        Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Lỗi rồi", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -364,13 +364,13 @@ public class SpendFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Infor_pet>> call, Response<List<Infor_pet>> response) {
                 listTC = (ArrayList<Infor_pet>) response.body();
-                Log.d("Pet Infor:", "" + response.body().size());
+//                Log.d("Pet Infor:", "" + response.body().size());
 
             }
 
             @Override
             public void onFailure(Call<List<Infor_pet>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Lỗi", Toast.LENGTH_SHORT).show();
             }
         });
         return listTC;
@@ -381,13 +381,13 @@ public class SpendFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Spend>> call, Response<List<Spend>> response) {
                 list = (ArrayList<Spend>) response.body();
-                Log.d("Pet Infor:", "" + response.body().size());
+//                Log.d("Pet Infor:", "" + response.body().size());
 
             }
 
             @Override
             public void onFailure(Call<List<Spend>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Lỗi", Toast.LENGTH_SHORT).show();
             }
         });
         return list;
