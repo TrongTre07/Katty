@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     RemindFragment remindFragment = new RemindFragment();
     SpendFragment spendFragment = new SpendFragment();
     SupportFragment supportFragment = new SupportFragment();
+    //trong dep trai
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
