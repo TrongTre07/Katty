@@ -17,6 +17,7 @@
 
         <EditText
             android:id="@+id/edNameUpdate"
+            android:hint="Nhập tên thú cưng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -27,6 +28,47 @@
 
         <EditText
             android:id="@+id/edBreedsUpdate"
+            android:hint="Nhập loài"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edWeightUpdate"
+            android:hint="Nhập cân nặng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edAgeUpdate"
+            android:hint="Nhập tuổi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edBirthdayUpdate"
+            android:hint="Nhập ngày sinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edOtherInfoUpdate"
+            android:hint="Nhập thêm thông tin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -47,7 +89,7 @@
                 android:layout_margin="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
-                android:text="Cancel"
+                android:text="Hủy"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +102,7 @@
                 android:layout_margin="5dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="48dp"
-                android:text="Update"
+                android:text="Cập nhật"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toStartOf="@+id/tvCancelUpdate"
                 app:layout_constraintTop_toTopOf="parent" />

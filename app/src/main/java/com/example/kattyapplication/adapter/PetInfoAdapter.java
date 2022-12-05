@@ -22,7 +22,7 @@ public class PetInfoAdapter extends ArrayAdapter<PetInfo> {
     private Context context;
     PetInfoFragment fragment;
     private ArrayList<PetInfo> list;
-    TextView tvName,tvBreeds;
+    TextView tvName,tvBreeds,tvWeight,tvAge,tvBirthday,tvOtherInfo;
 
 
     public PetInfoAdapter(@NonNull Context context, PetInfoFragment fragment, ArrayList<PetInfo> list) {
@@ -41,13 +41,15 @@ public class PetInfoAdapter extends ArrayAdapter<PetInfo> {
             view = inflater.inflate(R.layout.pet_info_item, null);
         }
         final PetInfo item = list.get(position);
+        String NS = item.getNgaySinh();
+        String sub = NS.substring(0,10);
         if(item != null){
             tvName = view.findViewById(R.id.tvName);
             tvName.setText("Tên thú cưng : "+item.getTenThuCung());
-            tvBreeds = view.findViewById(R.id.tvBreeds);
-            tvBreeds.setText("Loài: "+item.getLoai());
+
         }
 
         return view;
     }
+
 }

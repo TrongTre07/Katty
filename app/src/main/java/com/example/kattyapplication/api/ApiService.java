@@ -31,7 +31,7 @@ public interface ApiService {
     @GET("api/Values/detail-information/{id}")
     Call<List<PetInfo>> detailPetInfo() ;
     @POST("api/Values/add-information")
-    Call<Message> addPetInfo(@Body Pet pet );
+    Call<Message> addPetInfo(@Body Pet pet);
     @POST("api/Values/change-information")
     Call<Message> UpdatePetInfo(@Body PetInfo petInfo) ;
     @POST("api/Values/delete-information")

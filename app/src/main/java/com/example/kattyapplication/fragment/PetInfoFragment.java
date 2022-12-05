@@ -42,9 +42,9 @@ public class PetInfoFragment extends Fragment {
     ArrayList<Pet> listpet;
     FloatingActionButton floatAdd;
     Dialog dialog;
-    EditText edName, edBreeds;
+    EditText edName, edBreeds, edWeight, edAge, edBirthday, edOtherInfo;
     TextView tvCancel, tvAdd, tvUpdate;
-    TextView tvName, tvBreeds;
+    TextView tvName, tvBreeds, tvWeight, tvAge, tvBirthday, tvOtherInfo;
     PetInfoAdapter adapter;
     PetInfo item;
     ImageView ivDelete;
@@ -56,8 +56,12 @@ public class PetInfoFragment extends Fragment {
         lvPetInfo = view.findViewById(R.id.lvPetinfo);
         floatAdd = view.findViewById(R.id.floatAddPet);
         tvName = view.findViewById(R.id.tvName);
-        tvBreeds = view.findViewById(R.id.tvBreeds);
-        ivDelete = view.findViewById(R.id.ivDelete);
+//        tvBreeds = view.findViewById(R.id.tvBreeds);
+//        tvWeight = view.findViewById(R.id.tvWeight);
+//        tvAge = view.findViewById(R.id.tvAge);
+//        tvBirthday = view.findViewById(R.id.tvBirthday);
+//        tvOtherInfo = view.findViewById(R.id.tvOtherInfo);
+//        ivDelete = view.findViewById(R.id.ivDelete);
 
         callApiPetInfo();
 
@@ -67,24 +71,22 @@ public class PetInfoFragment extends Fragment {
                 openDialogAdd(getActivity());
             }
         });
-
         lvPetInfo.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                item = list.get(i);
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                item = list.get(position);
                 Log.d("Item INforrrrr:", item.toString());
-                openDialogUpdate(getActivity(), item.getId());
-
+                xoa(item.getId());
                 return true;
             }
         });
-
         lvPetInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                item = list.get(i);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                item = list.get(position);
                 Log.d("Item INforrrrr:", item.toString());
-                xoa(item.getId());
+                openDialogUpdate(getActivity(), item.getId());
+
             }
         });
 
@@ -116,6 +118,10 @@ public class PetInfoFragment extends Fragment {
         dialog.setContentView(R.layout.pet_info_dialog_add);
         edName = dialog.findViewById(R.id.edNameAdd);
         edBreeds = dialog.findViewById(R.id.edBreedsAdd);
+        edWeight = dialog.findViewById(R.id.edWeightAdd);
+        edAge = dialog.findViewById(R.id.edAgeAdd);
+        edBirthday = dialog.findViewById(R.id.edBirthdayAdd);
+        edOtherInfo = dialog.findViewById(R.id.edOtherInfoAdd);
         tvCancel = dialog.findViewById(R.id.tvCancelAdd);
         tvAdd = dialog.findViewById(R.id.tvAdd);
 
@@ -133,13 +139,21 @@ public class PetInfoFragment extends Fragment {
             public void onClick(View view) {
                 String name = edName.getText().toString();
                 String breed = edBreeds.getText().toString();
-                Pet item = new Pet(name, breed);
+                Float  weight= Float.parseFloat(edWeight.getText().toString()) ;
+                Integer age = Integer.parseInt( edAge.getText().toString());
+                String birday= edBirthday.getText().toString();
+                String otherinfo = edOtherInfo.getText().toString();
+                Pet item = new Pet(name, breed,weight,age,birday,otherinfo);
 
 
                 if (validate() > 0) {
                     item.setTenThuCung(edName.getText().toString());
                     item.setLoai(edBreeds.getText().toString());
-                    Pet pet = new Pet(item.getTenThuCung(),item.getLoai());
+                    item.setCanNang(Float.parseFloat(edWeight.getText().toString()));
+                    item.setTuoi(Integer.parseInt(edAge.getText().toString()));
+                    item.setNgaySinh(edBirthday.getText().toString());
+                    item.setThongTinKhac(edOtherInfo.getText().toString());
+                    Pet pet= new Pet( item.getTenThuCung(), item.getLoai(), item.getCanNang(), item.getTuoi(), item.getNgaySinh() ,item.getThongTinKhac());
                     ApiService.apiService.addPetInfo(pet).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
@@ -175,13 +189,22 @@ public class PetInfoFragment extends Fragment {
         dialog.setContentView(R.layout.pet_info_dialog_update);
         edName = dialog.findViewById(R.id.edNameUpdate);
         edBreeds = dialog.findViewById(R.id.edBreedsUpdate);
+        edWeight = dialog.findViewById(R.id.edWeightUpdate);
+        edAge = dialog.findViewById(R.id.edAgeUpdate);
+        edBirthday = dialog.findViewById(R.id.edBirthdayUpdate);
+        edOtherInfo = dialog.findViewById(R.id.edOtherInfoUpdate);
         tvCancel = dialog.findViewById(R.id.tvCancelUpdate);
         tvUpdate = dialog.findViewById(R.id.tvUpdate);
 
 
         edName.setText(String.valueOf(item.getTenThuCung()));
         edBreeds.setText(String.valueOf(item.getLoai()));
-
+        edWeight.setText(String.valueOf(item.getCanNang()));
+        String NS = item.getNgaySinh();
+        String sub = NS.substring(0,10);
+        edAge.setText(String.valueOf(item.getTuoi()));
+        edBirthday.setText(sub);
+        edOtherInfo.setText(String.valueOf(item.getThongTinKhac()));
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,13 +217,21 @@ public class PetInfoFragment extends Fragment {
             public void onClick(View view) {
                 String name = edName.getText().toString();
                 String breed = edBreeds.getText().toString();
-                PetInfo item = new PetInfo(id, name, breed);
+                Float  weight= Float.parseFloat(edWeight.getText().toString()) ;
+                Integer age = Integer.parseInt( edAge.getText().toString());
+                String birday= edBirthday.getText().toString();
+                String otherinfo = edOtherInfo.getText().toString();
+                PetInfo item = new PetInfo(id, name, breed,weight,age,birday,otherinfo);
 
 
                 if (validate() > 0) {
                     item.setTenThuCung(edName.getText().toString());
                     item.setLoai(edBreeds.getText().toString());
-                    PetInfo petInfo = new PetInfo(id, item.getTenThuCung(), item.getLoai());
+                    item.setCanNang(Float.parseFloat(edWeight.getText().toString()));
+                    item.setTuoi(Integer.parseInt(edAge.getText().toString()));
+                    item.setNgaySinh(edBirthday.getText().toString());
+                    item.setLoai(edOtherInfo.getText().toString());
+                    PetInfo petInfo = new PetInfo(id, item.getTenThuCung(), item.getLoai(), item.getCanNang(), item.getTuoi(), item.getNgaySinh() ,item.getThongTinKhac());
                     ApiService.apiService.UpdatePetInfo(petInfo).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
