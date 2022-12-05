@@ -5,16 +5,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListView
-
         android:id="@+id/lvSpend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_weight="2"
+        android:layout_margin="10dp"
+        android:background="#ffffff"
+        android:divider="#ffffff"
+        android:dividerHeight="5dp"/>
 
-    </ListView>
+    <ProgressBar
+        android:layout_marginTop="320dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ProgressBar"
+        android:layout_gravity="center"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -28,12 +33,12 @@
         android:src="@drawable/ic_add"/>
 
     <Button
+        
         android:id="@+id/btnSum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Statiscal"
+        android:text="Tính tổng"
         android:textColor="@color/black"
-        android:fontFamily="@font/fraunces_semibold"
         android:textSize="20dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"

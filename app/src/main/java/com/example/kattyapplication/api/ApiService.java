@@ -3,7 +3,6 @@ package com.example.kattyapplication.api;
 import com.example.kattyapplication.model.Infor_pet;
 import com.example.kattyapplication.model.SetlistSpend;
 import com.example.kattyapplication.model.Spend;
-import com.example.kattyapplication.model.TieuDung;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -34,7 +33,7 @@ public interface ApiService {
     Call<List<Spend>> getSpend();
 
     @POST("api/Values/add-tieudung")
-    Call<Message> addSpend (@Body TieuDung tieuDung);
+    Call<Message> addSpend (@Body Spend spend);
 
 
     @POST("api/Values/change-tieudung")

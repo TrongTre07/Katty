@@ -1,23 +1,25 @@
 package com.example.kattyapplication.model;
 
+import java.util.Date;
+
 public class Spend {
     private int id;
     private String loaiTieuDung;
     private int giaTien;
     private int idThuCung;
+    private String ngayChiTieu;
     private String tenThuCung;
     private String loai;
 
     public Spend() {
     }
 
-    public Spend(int id, String loaiTieuDung, int giaTien, int idThuCung, String tenThuCung, String loai) {
-        this.id = id;
+
+    public Spend(String loaiTieuDung, int giaTien, int idThuCung, String ngayChiTieu) {
         this.loaiTieuDung = loaiTieuDung;
         this.giaTien = giaTien;
         this.idThuCung = idThuCung;
-        this.tenThuCung = tenThuCung;
-        this.loai = loai;
+        this.ngayChiTieu = ngayChiTieu;
     }
 
     public int getId() {
@@ -52,6 +54,14 @@ public class Spend {
         this.idThuCung = idThuCung;
     }
 
+    public String getNgayChiTieu() {
+        return ngayChiTieu;
+    }
+
+    public void setNgayChiTieu(String ngayChiTieu) {
+        this.ngayChiTieu = ngayChiTieu;
+    }
+
     public String getTenThuCung() {
         return tenThuCung;
     }
@@ -75,6 +85,7 @@ public class Spend {
                 ", loaiTieuDung='" + loaiTieuDung + '\'' +
                 ", giaTien=" + giaTien +
                 ", idThuCung=" + idThuCung +
+                ", ngayChiTieu='" + ngayChiTieu + '\'' +
                 ", tenThuCung='" + tenThuCung + '\'' +
                 ", loai='" + loai + '\'' +
                 '}';

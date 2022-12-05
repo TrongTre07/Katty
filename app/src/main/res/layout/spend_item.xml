@@ -23,34 +23,45 @@
             android:padding="10dp">
 
             <TextView
-
+                android:textColor="@color/black"
                 android:id="@+id/tvTenTC"
                 android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
-                android:fontFamily="@font/fraunces"
+                android:paddingLeft="10dp"
                 />
 
             <TextView
+                android:textColor="@color/black"
                 android:id="@+id/tvLoaiTD"
                 android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:fontFamily="@font/fraunces"/>
+                android:paddingLeft="10dp"/>
 
             <TextView
-
+                android:textColor="@color/black"
                 android:textSize="25dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:fontFamily="@font/fraunces"
-                android:id="@+id/tvGiatien"/>
+                android:id="@+id/tvGiatien"
+                android:paddingLeft="10dp"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:background="@drawable/rounded_corner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:id="@+id/tvDate"
+                android:paddingLeft="10dp"/>
 
         </LinearLayout>
 

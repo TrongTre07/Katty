@@ -16,34 +16,87 @@
         android:padding="10dp">
 
         <TextView
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:fontFamily="@font/fraunces_semibold"
             android:gravity="center"
             android:text="Statistical"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:padding="5dp"/>
 
-        <TextView
-
+        <Spinner
+            android:textColor="@color/black"
             android:layout_width="380dp"
             android:layout_height="50dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
             android:minHeight="48dp"
             tools:ignore="SpeakableTextPresentCheck"
-            android:id="@+id/tvSum"
-            android:fontFamily="@font/fraunces"
-            android:textSize="25dp"/>
+            android:id="@+id/spnTotal"
+            android:textSize="25dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:textColor="@color/black"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:id="@+id/edtMonth"
+            android:hint="Nhập tháng muốn tính"
+            android:textSize="25dp"
+            android:paddingLeft="10dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Cancel"
-            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_width="380dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/tvCancelS"/>
+            android:background="@drawable/rounded_corner"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:id="@+id/tvResult"
+            android:hint="Tổng tiền tiêu"
+            android:textSize="25dp"
+            android:paddingLeft="10dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/tvCancelS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="5dp"
+                android:text="Hủy"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:text="Tính"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/tvCancelS"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

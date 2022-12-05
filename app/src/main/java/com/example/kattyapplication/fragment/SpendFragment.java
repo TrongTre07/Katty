@@ -1,19 +1,27 @@
 package com.example.kattyapplication.fragment;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,12 +38,14 @@ import com.example.kattyapplication.api.Message;
 import com.example.kattyapplication.model.Infor_pet;
 import com.example.kattyapplication.model.SetlistSpend;
 import com.example.kattyapplication.model.Spend;
-import com.example.kattyapplication.model.TieuDung;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,16 +59,19 @@ public class SpendFragment extends Fragment {
     FloatingActionButton floatAdd;
     Button btnSum;
     Dialog dialog;
-    EditText edtLoaiTD, edtGiatien;
-    TextView tvSum, tvCancel, tvAdd, tvUpdate;
+    EditText edtLoaiTD, edtGiatien, edtMonth;
+    TextView tvCancel, tvAdd, tvUpdate, tvResult, tvTotal, tvDate;
     TextView tvLoaiTD, tvGiatien, tvTenTC;
     SpendAdapter adapter;
     Spend item;
+    View view;
+    ProgressBar pb;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.spend_fragment, container, false);
+        view = inflater.inflate(R.layout.spend_fragment, container, false);
         lvSpend = view.findViewById(R.id.lvSpend);
         floatAdd = view.findViewById(R.id.floatAddTD);
         btnSum = view.findViewById(R.id.btnSum);
@@ -66,8 +79,12 @@ public class SpendFragment extends Fragment {
         tvGiatien = view.findViewById(R.id.tvGiatien);
         tvLoaiTD = view.findViewById(R.id.tvLoaiTD);
 
+        pb = view.findViewById(R.id.ProgressBar);
+        pb.setVisibility(view.VISIBLE);
+
         getlistPet();
         callApiSpend();
+
 
         floatAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,23 +100,40 @@ public class SpendFragment extends Fragment {
             }
         });
 
-        lvSpend.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                item = list.get(i);
-                Log.d("Item INforrrrr:", item.toString());
-                openDialogUpdate(getActivity(), item.getId());
-
-                return true;
-            }
-        });
-
         lvSpend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 item = list.get(i);
                 Log.d("Item INforrrrr:", item.toString());
+                openDialogUpdate(getActivity(), item.getId());
+
+            }
+        });
+
+
+        lvSpend.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                item = list.get(i);
+                Log.d("Item INforrrrr:", item.toString());
                 xoa(item.getId());
+                return false;
+            }
+        });
+
+        lvSpend.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                if (i == SCROLL_STATE_TOUCH_SCROLL){
+                    btnSum.setVisibility(absListView.INVISIBLE);
+                }else {
+                    btnSum.setVisibility(absListView.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
             }
         });
 
@@ -113,12 +147,13 @@ public class SpendFragment extends Fragment {
                 list = (ArrayList<Spend>) response.body();
                 adapter = new SpendAdapter(getContext(), SpendFragment.this, list);
                 lvSpend.setAdapter(adapter);
+                pb.setVisibility(view.GONE);
 
             }
 
             @Override
             public void onFailure(Call<List<Spend>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -130,11 +165,65 @@ public class SpendFragment extends Fragment {
         dialog.setContentView(R.layout.spend_dialog_add);
         edtLoaiTD = dialog.findViewById(R.id.edtLoaitdAdd);
         edtGiatien = dialog.findViewById(R.id.edtGiatienADD);
+        tvDate = dialog.findViewById(R.id.tvDateAdd);
         Spinner spnTenTCAdd = dialog.findViewById(R.id.spnTenTCAdd);
         tvCancel = dialog.findViewById(R.id.tvCancelAdd);
         tvAdd = dialog.findViewById(R.id.tvAdd);
 
+        edtLoaiTD.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+                    closeKeyBoard();
+                }
+                return false;
+            }
+        });
+        edtGiatien.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+                    closeKeyBoard();
+                }
+                return false;
+            }
+        });
+
+
          getTenTC(spnTenTCAdd);
+
+        Calendar calendar = Calendar.getInstance();
+        tvDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                                String ngay= "";
+                                String thang= "";
+                                if(i2 < 10){
+                                    ngay = "0" + i2;
+                                }else{
+                                    ngay = String.valueOf(i2);
+                                }
+
+                                if((i1 + 1) < 10){
+                                    thang = "0" + (i1 + 1);
+                                }
+                                else{
+                                    thang = String.valueOf((i1 + 1));
+                                }
+
+                                tvDate.setText(i + "-" + thang + "-" + ngay);
+                            }
+                        },
+                        calendar.get(calendar.YEAR),
+                        calendar.get(calendar.MONTH),
+                        calendar.get(calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
 
 
         tvCancel.setOnClickListener(new View.OnClickListener() {
@@ -144,39 +233,44 @@ public class SpendFragment extends Fragment {
             }
         });
 
+
+
         tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TieuDung item = new TieuDung();
+                Spend item = new Spend();
 
 
                 if (validate() > 0) {
                     HashMap<String, Object> hsPet = (HashMap<String, Object>) spnTenTCAdd.getSelectedItem();
                     Integer idThuCung = (Integer) hsPet.get("id");
-                    Log.d("kjbjhbjhgjgjhbkjgjh", ""+idThuCung);
+                    Log.d("id thú cưng >>> ", ""+idThuCung);
                     item.setLoaiTieuDung(edtLoaiTD.getText().toString());
                     item.setGiaTien(Integer.parseInt(edtGiatien.getText().toString()));
-                    TieuDung tieuDung = new TieuDung(item.getLoaiTieuDung(), item.getGiaTien(), idThuCung);
-                    ApiService.apiService.addSpend(tieuDung).enqueue(new Callback<Message>() {
+
+                    item.setNgayChiTieu(tvDate.getText().toString());
+
+                    Spend spend = new Spend(item.getLoaiTieuDung(), item.getGiaTien(), idThuCung, item.getNgayChiTieu());
+                    ApiService.apiService.addSpend(spend).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
                             Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                //thanh cong
-                                Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Thêm Thành công", Toast.LENGTH_SHORT).show();
                                 callApiSpend();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Thất bại", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
 
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(context, "Khong thanh cong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Không thành công", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -184,6 +278,7 @@ public class SpendFragment extends Fragment {
                 }
             }
         });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
 
@@ -196,13 +291,70 @@ public class SpendFragment extends Fragment {
         dialog.setContentView(R.layout.spend_dialog_update);
         edtLoaiTD = dialog.findViewById(R.id.edtLoaitdUpdate);
         edtGiatien = dialog.findViewById(R.id.edtGiatienUdate);
+        tvDate = dialog.findViewById(R.id.tvDateUpdate);
         Spinner spnTenTCUpdate = dialog.findViewById(R.id.spnTenTCUpdate);
         tvCancel = dialog.findViewById(R.id.tvCancelUpdate);
         tvUpdate = dialog.findViewById(R.id.tvUpdate);
         getTenTC(spnTenTCUpdate);
 
+        edtLoaiTD.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+                    closeKeyBoard();
+                }
+                return false;
+            }
+        });
+        edtGiatien.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+                    closeKeyBoard();
+                }
+                return false;
+            }
+        });
+
         edtLoaiTD.setText(String.valueOf(item.getLoaiTieuDung()));
         edtGiatien.setText(String.valueOf(item.getGiaTien()));
+        String day = item.getNgayChiTieu();
+        String sub = day.substring(0, 10);
+        tvDate.setText(sub);
+
+        Calendar calendar = Calendar.getInstance();
+        tvDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                                String ngay= "";
+                                String thang= "";
+                                if(i2 < 10){
+                                    ngay = "0" + i2;
+                                }else{
+                                    ngay = String.valueOf(i2);
+                                }
+
+                                if((i1 + 1) < 10){
+                                    thang = "0" + (i1 + 1);
+                                }
+                                else{
+                                    thang = String.valueOf((i1 + 1));
+                                }
+
+                                tvDate.setText(i + "-" + thang + "-" + ngay);
+                            }
+                        },
+                        calendar.get(calendar.YEAR),
+                        calendar.get(calendar.MONTH),
+                        calendar.get(calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
+
 
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,7 +366,8 @@ public class SpendFragment extends Fragment {
         tvUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TieuDung item = new TieuDung();
+                Spend item = new Spend();
+
 
 
                 if (validate() > 0) {
@@ -223,28 +376,30 @@ public class SpendFragment extends Fragment {
                     Log.d("idTC>>>>", ""+idThuCung);
                     item.setLoaiTieuDung(edtLoaiTD.getText().toString());
                     item.setGiaTien(Integer.parseInt(edtGiatien.getText().toString()));
-                    TieuDung tieuDung = new TieuDung(item.getLoaiTieuDung(), item.getGiaTien(), idThuCung);
-                    SetlistSpend setlistSpend = new SetlistSpend(id, item.getLoaiTieuDung(), item.getGiaTien(), idThuCung );
+                    item.setNgayChiTieu(tvDate.getText().toString());
+
+                    SetlistSpend setlistSpend = new SetlistSpend(id, item.getLoaiTieuDung(), item.getGiaTien(), idThuCung, item.getNgayChiTieu() );
                     Log.d("SLDKFJSLDKFJDSLKFJDSLK", setlistSpend.toString());
                     ApiService.apiService.updateSpend(setlistSpend).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
+
                             Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                 //thanh cong
-                                Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
                                 callApiSpend();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Update Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -252,6 +407,7 @@ public class SpendFragment extends Fragment {
                 }
             }
         });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
 
@@ -281,21 +437,41 @@ public class SpendFragment extends Fragment {
     public void openDialogStatistical(final Context context) {
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.spend_statistical);
-        tvSum = dialog.findViewById(R.id.tvSum);
+        tvResult = dialog.findViewById(R.id.tvResult);
+        edtMonth = dialog.findViewById(R.id.edtMonth);
         tvCancel = dialog.findViewById(R.id.tvCancelS);
+        tvTotal = dialog.findViewById(R.id.tvTotal);
+        Spinner spnTotal = dialog.findViewById(R.id.spnTotal);
+        getTenTC(spnTotal);
 
-        ArrayList<Spend> test = new ArrayList<>();
-        test = getlistSpend();
-        for (Spend TD : test) {
-            HashMap<String, Object> td = new HashMap<>();
-            td.put("id", TD.getId());
-            td.put("tenThuCung", TD.getTenThuCung());
-            int total = 0;
-            for(Spend Total : test){
-                total = total + Total.getGiaTien();
+        tvTotal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Spend> list = new ArrayList<>();
+                list = getlistSpend();
+                HashMap<String, Object> hsPet = (HashMap<String, Object>) spnTotal.getSelectedItem();
+                Integer idTC = (Integer) hsPet.get("id");
+                String month = edtMonth.getText().toString();
+
+                int total = 0;
+                for(Spend Total : list){
+                    String day = Total.getNgayChiTieu();
+                    String sub = day.substring(5, 7);
+                    String sub2 = day.substring(6,7);
+
+                    if(idTC.equals(Total.getIdThuCung())){
+
+                        if(sub.equals(month) || sub2.equals(month)){
+                            total = total + Total.getGiaTien();
+                        }
+
+                    }
+                }
+
+                int finalTotal = total;
+                tvResult.setText(finalTotal +"VND");
             }
-            tvSum.setText(total +"VND");
-        }
+        });
 
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -304,8 +480,11 @@ public class SpendFragment extends Fragment {
             }
         });
 
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         dialog.show();
+
+
     }
 
 
@@ -323,16 +502,16 @@ public class SpendFragment extends Fragment {
                     public void onResponse(Call<Message> call, Response<Message> response) {
                         Message message = response.body();
                         if(message.getId() == 1){
-                            Toast.makeText(getContext(), "Delete successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Xóa thành Công", Toast.LENGTH_LONG).show();
                             callApiSpend();
                         }else{
-                            Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Xóa thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Message> call, Throwable t) {
-                        Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -370,7 +549,7 @@ public class SpendFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Infor_pet>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
             }
         });
         return listTC;
@@ -387,10 +566,18 @@ public class SpendFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Spend>> call, Throwable t) {
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
             }
         });
         return list;
+    }
+
+    public void closeKeyBoard(){
+        view = getActivity().getCurrentFocus();
+        if (view != null){
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
 }

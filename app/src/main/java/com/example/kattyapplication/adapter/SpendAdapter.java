@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import com.example.kattyapplication.R;
 import com.example.kattyapplication.fragment.SpendFragment;
 import com.example.kattyapplication.model.Spend;
-import com.example.kattyapplication.model.TieuDung;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class SpendAdapter extends ArrayAdapter<Spend> {
     private Context context;
     SpendFragment fragment;
     private ArrayList<Spend> list;
-    TextView tvLoaiTD, tvGiatien, tvTenTC;
+    TextView tvLoaiTD, tvGiatien, tvTenTC, tvDate;
     ImageView ivDelete;
 
 
@@ -43,6 +42,8 @@ public class SpendAdapter extends ArrayAdapter<Spend> {
             view = inflater.inflate(R.layout.spend_item, null);
         }
         final Spend item = list.get(position);
+        String day = item.getNgayChiTieu();
+        String sub = day.substring(0, 10);
         if(item != null){
             tvLoaiTD = view.findViewById(R.id.tvLoaiTD);
             tvLoaiTD.setText("Loại tiêu dùng : "+item.getLoaiTieuDung());
@@ -52,6 +53,9 @@ public class SpendAdapter extends ArrayAdapter<Spend> {
 
             tvTenTC = view.findViewById(R.id.tvTenTC);
             tvTenTC.setText("Tên Pet: "+item.getTenThuCung());
+
+            tvDate = view.findViewById(R.id.tvDate);
+            tvDate.setText("Ngày chi tiêu: "+sub);
 
         }
 

@@ -22,31 +22,46 @@
             android:layout_marginBottom="2dp"
             android:background="@drawable/rounded_corner"
             android:minHeight="48dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/fraunces"
-            android:id="@+id/spnTenTCAdd"/>
+            android:textSize="25dp"
+            android:id="@+id/spnTenTCAdd"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"/>
 
         <EditText
-
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
             android:minHeight="48dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/fraunces"
-            android:id="@+id/edtLoaitdAdd"/>
+            android:textSize="25dp"
+            android:hint="Nhập loại tiêu dùng"
+            android:id="@+id/edtLoaitdAdd"
+            android:paddingLeft="10dp"/>
 
         <EditText
-
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/rounded_corner"
             android:minHeight="48dp"
-            android:textSize="15dp"
-            android:fontFamily="@font/fraunces"
-            android:id="@+id/edtGiatienADD"/>
+            android:textSize="25dp"
+            android:hint="Nhập giá tiền"
+            android:id="@+id/edtGiatienADD"
+            android:paddingLeft="10dp"/>
+
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_corner"
+            android:minHeight="48dp"
+            android:textSize="25dp"
+            android:hint="Chọn ngày chi tiêu"
+            android:id="@+id/tvDateAdd"
+            android:paddingLeft="10dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -54,49 +69,32 @@
             android:layout_margin="5dp">
 
             <TextView
+                android:textColor="@color/black"
                 android:id="@+id/tvCancelAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
-                android:text="Cancel"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="5dp"
+                android:text="Hủy"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
+                android:textColor="@color/black"
                 android:id="@+id/tvAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="5dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="48dp"
-                android:text="Add"
+                android:layout_marginEnd="20dp"
+                android:text="Thêm"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toStartOf="@+id/tvCancelAdd"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!--            <ImageButton-->
-<!--                android:id="@+id/btCancelAdd"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:background="@mipmap/cancel"-->
-<!--                android:layout_marginLeft="50dp"/>-->
-
-<!--            <ImageButton-->
-<!--                android:id="@+id/btSaveAdd"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:background="@mipmap/save"-->
-<!--                android:layout_marginLeft="170dp"/>-->
+                app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </LinearLayout>

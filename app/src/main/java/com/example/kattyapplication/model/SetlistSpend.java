@@ -5,12 +5,14 @@ public class SetlistSpend {
     private String loaiTieuDung;
     private int giaTien;
     private int idThuCung;
+    private String ngayChiTieu;
 
-    public SetlistSpend(int id, String loaiTieuDung, int giaTien, int idThuCung) {
+    public SetlistSpend(int id, String loaiTieuDung, int giaTien, int idThuCung, String ngayChiTieu) {
         this.id = id;
         this.loaiTieuDung = loaiTieuDung;
         this.giaTien = giaTien;
         this.idThuCung = idThuCung;
+        this.ngayChiTieu = ngayChiTieu;
     }
 
     public int getId() {
@@ -45,6 +47,14 @@ public class SetlistSpend {
         this.idThuCung = idThuCung;
     }
 
+    public String getNgayChiTieu() {
+        return ngayChiTieu;
+    }
+
+    public void setNgayChiTieu(String ngayChiTieu) {
+        this.ngayChiTieu = ngayChiTieu;
+    }
+
     @Override
     public String toString() {
         return "SetlistSpend{" +
@@ -52,6 +62,7 @@ public class SetlistSpend {
                 ", loaiTieuDung='" + loaiTieuDung + '\'' +
                 ", giaTien=" + giaTien +
                 ", idThuCung=" + idThuCung +
+                ", ngayChiTieu='" + ngayChiTieu + '\'' +
                 '}';
     }
 }
