@@ -17,6 +17,7 @@ public class support {
         this.noiDung = noiDung;
     }
 
+
     public Integer getId() {
         return id;
     }

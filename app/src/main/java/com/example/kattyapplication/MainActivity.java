@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.AutoCompleteTextView;
 
 import com.example.kattyapplication.fragment.PetInfoFragment;
 import com.example.kattyapplication.fragment.RemindFragment;
@@ -52,4 +53,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

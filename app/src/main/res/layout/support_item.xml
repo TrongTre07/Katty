@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/onClickSupport"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="#FFE1E1"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="15dp">
+    android:layout_margin="10dp"
+    app:cardElevation="15dp"
+    app:cardCornerRadius="15dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#FFE1E1"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        >
+        android:padding="4dp">
 
         <TextView
             android:id="@+id/tvTenBenh"
-            android:textSize="25dp"
-            android:background="@drawable/rounded_corner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:fontFamily="@font/fraunces"/>
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:padding="5dp"
+            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tvNoiDung"
-            android:textSize="25dp"
-            android:background="@drawable/rounded_corner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/fraunces"/>
+        <!--        <TextView-->
+        <!--            android:id="@+id/tvNoiDung"-->
+        <!--            android:textSize="25dp"-->
+        <!--            android:background="@drawable/rounded_corner"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="2dp"-->
+        <!--            android:fontFamily="@font/fraunces"/>-->
 
     </LinearLayout>
 

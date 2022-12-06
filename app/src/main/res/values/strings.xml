@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">KattyApplication</string>
+<!--    <string-array name="diseases">-->
+<!--        <item>Bệnh nấm mèo</item>-->
+<!--        <item>Bệnh tiêu chảy ở mèo</item>-->
+<!--        <item>Mèo bị nôn</item>-->
+<!--        <item>Bệnh Ký sinh trùng bên trong và ngoài của mèo</item>-->
+<!--        <item>Bệnh Chlamydia ở mèo</item>-->
+<!--    </string-array>-->
 </resources>
