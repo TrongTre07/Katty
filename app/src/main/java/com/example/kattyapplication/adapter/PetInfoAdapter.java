@@ -1,6 +1,10 @@
 package com.example.kattyapplication.adapter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +50,6 @@ public class PetInfoAdapter extends ArrayAdapter<PetInfo> {
         if(item != null){
             tvName = view.findViewById(R.id.tvName);
             tvName.setText("Tên thú cưng : "+item.getTenThuCung());
-
         }
 
         return view;

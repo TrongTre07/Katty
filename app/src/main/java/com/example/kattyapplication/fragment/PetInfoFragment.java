@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +51,8 @@ public class PetInfoFragment extends Fragment {
     PetInfoAdapter adapter;
     PetInfo item;
     ImageView ivDelete;
-
+    ProgressBar progressBar;
+    View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +60,8 @@ public class PetInfoFragment extends Fragment {
         lvPetInfo = view.findViewById(R.id.lvPetinfo);
         floatAdd = view.findViewById(R.id.floatAddPet);
         tvName = view.findViewById(R.id.tvName);
+        progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(view.VISIBLE);
 //        tvBreeds = view.findViewById(R.id.tvBreeds);
 //        tvWeight = view.findViewById(R.id.tvWeight);
 //        tvAge = view.findViewById(R.id.tvAge);
@@ -100,7 +106,7 @@ public class PetInfoFragment extends Fragment {
                 list = (ArrayList<PetInfo>) response.body();
                 adapter = new PetInfoAdapter(getContext(), PetInfoFragment.this, list);
                 lvPetInfo.setAdapter(adapter);
-
+                progressBar.setVisibility(view.GONE);
             }
 
             @Override
@@ -179,6 +185,7 @@ public class PetInfoFragment extends Fragment {
                 }
             }
         });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
 
