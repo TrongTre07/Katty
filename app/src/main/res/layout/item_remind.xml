@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#FFE1E1"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_search">
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:background="#FFE1E1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:paddingLeft="30dp"
+                    android:id="@+id/tvTime"
+                    android:text="00000"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner"
+
+                    android:textSize="25dp" />
+
+                <TextView
+
+                    android:paddingLeft="18dp"
+                    android:id="@+id/tvDate"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@drawable/rounded_corner"
+
+                    android:textSize="25dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:id="@+id/tvContentRemind"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/rounded_corner"
+
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
+        <Switch
+
+            android:id="@+id/swt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:minWidth="40dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:theme="@style/switchOn"
+            android:backgroundTint="#FFE1E1"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

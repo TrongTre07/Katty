@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.example.kattyapplication.fragment.PetInfoFragment;
 import com.example.kattyapplication.fragment.RemindFragment;
+import com.example.kattyapplication.fragment.RemindFragmentRecyclerView;
 import com.example.kattyapplication.fragment.SpendFragment;
 import com.example.kattyapplication.fragment.SupportFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     RemindFragment remindFragment = new RemindFragment();
     SpendFragment spendFragment = new SpendFragment();
     SupportFragment supportFragment = new SupportFragment();
+    RemindFragmentRecyclerView remindFragmentRecyclerView = new RemindFragmentRecyclerView();
+    //trong dep trai
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, petInfoFragment).commit();
                         return true;
                     case R.id.Remind:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, remindFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, remindFragmentRecyclerView).commit();
                         return true;
                     case R.id.Spend:
                         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, spendFragment).commit();
