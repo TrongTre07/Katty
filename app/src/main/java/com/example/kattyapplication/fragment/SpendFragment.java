@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -61,7 +62,7 @@ public class SpendFragment extends Fragment {
     FloatingActionButton floatAdd;
     Button btnSum;
     Dialog dialog;
-    EditText edtLoaiTD, edtGiatien, edtMonth;
+    EditText edtLoaiTD, edtGiatien;
     TextView tvCancel, tvAdd, tvUpdate, tvResult, tvTotal, tvDate;
     TextView tvLoaiTD, tvGiatien, tvTenTC;
     SpendAdapter adapter;
@@ -435,16 +436,28 @@ public class SpendFragment extends Fragment {
         spnTenTC.setAdapter(adapter);
     }
 
+    public void getMonth(Spinner spnMonth){
+        String[] month = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+        ArrayAdapter ad = new ArrayAdapter(getContext(),
+                android.R.layout.simple_spinner_item, month);
+
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnMonth.setAdapter(ad);
+
+    }
+
 
     public void openDialogStatistical(final Context context) {
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.spend_statistical);
         tvResult = dialog.findViewById(R.id.tvResult);
-        edtMonth = dialog.findViewById(R.id.edtMonth);
+        Spinner spnMonth = dialog.findViewById(R.id.spnMonth);
         tvCancel = dialog.findViewById(R.id.tvCancelS);
         tvTotal = dialog.findViewById(R.id.tvTotal);
         Spinner spnTotal = dialog.findViewById(R.id.spnTotal);
         getTenTC(spnTotal);
+
+        getMonth(spnMonth);
 
         tvTotal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -453,17 +466,18 @@ public class SpendFragment extends Fragment {
                 list = getlistSpend();
                 HashMap<String, Object> hsPet = (HashMap<String, Object>) spnTotal.getSelectedItem();
                 Integer idTC = (Integer) hsPet.get("id");
-                String month = edtMonth.getText().toString();
+
+                String month = spnMonth.getSelectedItem().toString();
+                Log.d("month>>>> ", month);
 
                 int total = 0;
                 for(Spend Total : list){
                     String day = Total.getNgayChiTieu();
                     String sub = day.substring(5, 7);
-                    String sub2 = day.substring(6,7);
 
                     if(idTC.equals(Total.getIdThuCung())){
 
-                        if(sub.equals(month) || sub2.equals(month)){
+                        if(sub.equals(month)){
                             total = total + Total.getGiaTien();
                         }
 
