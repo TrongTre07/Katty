@@ -24,10 +24,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.kattyapplication.API.APIService;
+import com.example.kattyapplication.Models.Message;
 import com.example.kattyapplication.R;
 import com.example.kattyapplication.adapter.PetInfoAdapter;
-import com.example.kattyapplication.api.ApiService;
-import com.example.kattyapplication.api.Message;
+//import com.example.kattyapplication.api.ApiService;
+//import com.example.kattyapplication.api.Message;
 import com.example.kattyapplication.model.Pet;
 import com.example.kattyapplication.model.PetInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -100,7 +103,7 @@ public class PetInfoFragment extends Fragment {
     }
 
     public void callApiPetInfo() {
-        ApiService.apiService.getPetInfo().enqueue(new Callback<List<PetInfo>>() {
+        APIService.apiService.getPetInfo().enqueue(new Callback<List<PetInfo>>() {
             @Override
             public void onResponse(Call<List<PetInfo>> call, Response<List<PetInfo>> response) {
                 list = (ArrayList<PetInfo>) response.body();
@@ -160,7 +163,7 @@ public class PetInfoFragment extends Fragment {
                     item.setNgaySinh(edBirthday.getText().toString());
                     item.setThongTinKhac(edOtherInfo.getText().toString());
                     Pet pet= new Pet( item.getTenThuCung(), item.getLoai(), item.getCanNang(), item.getTuoi(), item.getNgaySinh() ,item.getThongTinKhac());
-                    ApiService.apiService.addPetInfo(pet).enqueue(new Callback<Message>() {
+                    APIService.apiService.addPetInfo(pet).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
@@ -239,7 +242,7 @@ public class PetInfoFragment extends Fragment {
                     item.setNgaySinh(edBirthday.getText().toString());
                     item.setLoai(edOtherInfo.getText().toString());
                     PetInfo petInfo = new PetInfo(id, item.getTenThuCung(), item.getLoai(), item.getCanNang(), item.getTuoi(), item.getNgaySinh() ,item.getThongTinKhac());
-                    ApiService.apiService.UpdatePetInfo(petInfo).enqueue(new Callback<Message>() {
+                    APIService.apiService.UpdatePetInfo(petInfo).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
@@ -276,7 +279,7 @@ public class PetInfoFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ApiService.apiService.DeletePetInfo(id).enqueue(new Callback<Message>() {
+                APIService.apiService.DeletePetInfo(id).enqueue(new Callback<Message>() {
                     @Override
                     public void onResponse(Call<Message> call, Response<Message> response) {
                         Message message = response.body();
