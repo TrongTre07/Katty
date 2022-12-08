@@ -1,8 +1,11 @@
-package com.example.kattyapplication.api;
+package com.example.kattyapplication.API;
 
 import com.example.kattyapplication.model.Infor_pet;
 import com.example.kattyapplication.model.SetlistSpend;
 import com.example.kattyapplication.model.Spend;
+import com.example.kattyapplication.Models.Message;
+import com.example.kattyapplication.Models.Remind;
+import com.example.kattyapplication.Models.RemindUpload;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -25,24 +28,37 @@ public interface ApiService {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
+public interface APIService {
 
-    @GET("api/Values/all-information")
-    Call<List<Infor_pet>> getInforPet();
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-    @GET("api/Values/layDanhSachTieudung")
-    Call<List<Spend>> getSpend();
+    APIService apiService = new Retrofit.Builder().baseUrl("https://trongtre.kynalab.com/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(APIService.class);
 
     @POST("api/Values/add-tieudung")
     Call<Message> addSpend (@Body Spend spend);
+    //https://trongtre.kynalab.com/api/Values/all-remind
 
+    @GET("api/Values/all-remind")
+    Call<List<Remind>> getList();
 
     @POST("api/Values/change-tieudung")
     Call<Message> updateSpend (@Body SetlistSpend setlistSpend);
+    @POST("api/Values/add-remind")
+    Call<Message> addRemind (@Body RemindUpload remindUpload);
 
     @POST("api/Values/delete-tieudung")
     Call<Message> deleteSpend(@Body Integer id);
+    @POST("api/Values/add-remind")
+    Call<Message> addRemind2 (@Body Remind remind);
 
     @POST("api/Values/delete-tieudung")
     Call<Message> deleteTieuDung (@Query("id") int id);
+    @POST("api/values/change-remind")
+    Call<Message> changeRemind (@Body Remind remind);
 
+    @POST("api/Values/delete-remind")
+    Call<Message> deleteRemind (@Query("id") int id);
 }
