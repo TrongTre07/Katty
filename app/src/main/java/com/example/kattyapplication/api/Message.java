@@ -1,4 +1,4 @@
-package com.example.kattyapplication.api;
+package com.example.kattyapplication.API;
 
 public class Message {
     private int id;

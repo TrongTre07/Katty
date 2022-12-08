@@ -31,10 +31,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.kattyapplication.API.APIService;
+import com.example.kattyapplication.Models.Message;
 import com.example.kattyapplication.R;
 import com.example.kattyapplication.adapter.SpendAdapter;
-import com.example.kattyapplication.api.ApiService;
-import com.example.kattyapplication.api.Message;
+//import com.example.kattyapplication.api.ApiService;
+//import com.example.kattyapplication.api.Message;
 import com.example.kattyapplication.model.Infor_pet;
 import com.example.kattyapplication.model.SetlistSpend;
 import com.example.kattyapplication.model.Spend;
@@ -141,7 +143,7 @@ public class SpendFragment extends Fragment {
     }
 
     public void callApiSpend() {
-        ApiService.apiService.getSpend().enqueue(new Callback<List<Spend>>() {
+        APIService.apiService.getSpend().enqueue(new Callback<List<Spend>>() {
             @Override
             public void onResponse(Call<List<Spend>> call, Response<List<Spend>> response) {
                 list = (ArrayList<Spend>) response.body();
@@ -251,7 +253,7 @@ public class SpendFragment extends Fragment {
                     item.setNgayChiTieu(tvDate.getText().toString());
 
                     Spend spend = new Spend(item.getLoaiTieuDung(), item.getGiaTien(), idThuCung, item.getNgayChiTieu());
-                    ApiService.apiService.addSpend(spend).enqueue(new Callback<Message>() {
+                    APIService.apiService.addSpend(spend).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
@@ -380,7 +382,7 @@ public class SpendFragment extends Fragment {
 
                     SetlistSpend setlistSpend = new SetlistSpend(id, item.getLoaiTieuDung(), item.getGiaTien(), idThuCung, item.getNgayChiTieu() );
                     Log.d("SLDKFJSLDKFJDSLKFJDSLK", setlistSpend.toString());
-                    ApiService.apiService.updateSpend(setlistSpend).enqueue(new Callback<Message>() {
+                    APIService.apiService.updateSpend(setlistSpend).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Message message = response.body();
@@ -497,7 +499,7 @@ public class SpendFragment extends Fragment {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ApiService.apiService.deleteTieuDung(id).enqueue(new Callback<Message>() {
+                APIService.apiService.deleteTieuDung(id).enqueue(new Callback<Message>() {
                     @Override
                     public void onResponse(Call<Message> call, Response<Message> response) {
                         Message message = response.body();
@@ -539,7 +541,7 @@ public class SpendFragment extends Fragment {
     }
 
     public ArrayList<Infor_pet> getlistPet() {
-        ApiService.apiService.getInforPet().enqueue(new Callback<List<Infor_pet>>() {
+        APIService.apiService.getInforPet().enqueue(new Callback<List<Infor_pet>>() {
             @Override
             public void onResponse(Call<List<Infor_pet>> call, Response<List<Infor_pet>> response) {
                 listTC = (ArrayList<Infor_pet>) response.body();
@@ -556,7 +558,7 @@ public class SpendFragment extends Fragment {
     }
 
     public ArrayList<Spend> getlistSpend() {
-        ApiService.apiService.getSpend().enqueue(new Callback<List<Spend>>() {
+        APIService.apiService.getSpend().enqueue(new Callback<List<Spend>>() {
             @Override
             public void onResponse(Call<List<Spend>> call, Response<List<Spend>> response) {
                 list = (ArrayList<Spend>) response.body();

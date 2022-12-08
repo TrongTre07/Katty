@@ -3,6 +3,9 @@ package com.example.kattyapplication.API;
 import com.example.kattyapplication.Models.Message;
 import com.example.kattyapplication.Models.Remind;
 import com.example.kattyapplication.Models.RemindUpload;
+import com.example.kattyapplication.model.Infor_pet;
+import com.example.kattyapplication.model.SetlistSpend;
+import com.example.kattyapplication.model.Spend;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -41,4 +44,17 @@ public interface APIService {
 
     @POST("api/Values/delete-remind")
     Call<Message> deleteRemind (@Query("id") int id);
+
+    @GET("api/Values/all-information")
+    Call<List<Infor_pet>> getInforPet();
+    @GET("api/Values/layDanhSachTieudung")
+    Call<List<Spend>> getSpend();
+    @POST("api/Values/add-tieudung")
+    Call<Message> addSpend (@Body Spend spend);
+    @POST("api/Values/change-tieudung")
+    Call<Message> updateSpend (@Body SetlistSpend setlistSpend);
+    @POST("api/Values/delete-tieudung")
+    Call<Message> deleteSpend(@Body Integer id);
+    @POST("api/Values/delete-tieudung")
+    Call<Message> deleteTieuDung (@Query("id") int id);
 }
