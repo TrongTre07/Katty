@@ -18,16 +18,24 @@
             android:layout_height="545dp"
             android:src="@drawable/cutecat" />
 
-        <Button
-            android:id="@+id/btnContinue"
-            android:layout_width="wrap_content"
-            android:layout_height="68dp"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:backgroundTint="#FCA2AF"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/fraunces_semibold"
-            android:text="Continue"
-            android:textSize="35dp" />
+            android:gravity="center"
+            android:text="Katty App"
+            android:textColor="@color/white"
+            android:textSize="50dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fraunces_thin"
+            android:gravity="center"
+            android:text="Pet management"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:textStyle="italic" />
 
     </LinearLayout>
 
