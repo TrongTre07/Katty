@@ -19,9 +19,11 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-            .create();
-    ApiService apiService = new Retrofit.Builder()
-            .baseUrl("https://trongtre.kynalab.com/")
+public interface APIService {
+
+    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+
+    APIService apiService = new Retrofit.Builder().baseUrl("https://trongtre.kynalab.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(APIService.class);
