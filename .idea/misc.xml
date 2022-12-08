@@ -4,9 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/divider.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/notification_custom.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_button.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_corner.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_item.xml" value="0.1725" />
         <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_search.xml" value="0.1725" />
         <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/activity_main.xml" value="0.1308876811594203" />
         <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/alertdialog_remind.xml" value="0.22239583333333332" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/custom_notification_small.xml" value="0.511504424778761" />
         <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/dialog_remind.xml" value="0.2234375" />
         <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/item_remind.xml" value="0.22239583333333332" />
         <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/remind_dialog_add.xml" value="0.2234375" />

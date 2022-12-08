@@ -1,5 +1,6 @@
 package com.example.kattyapplication.fragment;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -32,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,6 +46,7 @@ import com.example.kattyapplication.Models.Remind;
 import com.example.kattyapplication.Models.RemindUpload;
 import com.example.kattyapplication.R;
 import com.example.kattyapplication.Receivers.AlarmReceiver;
+import com.example.kattyapplication.Receivers.SwitchButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,7 +66,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RemindFragmentRecyclerView extends Fragment {
+public class RemindFragmentRecyclerView extends Fragment implements SwitchButton {
+
 
     ArrayList<Remind> list;
     SimpleDateFormat simpleDateFormat;
@@ -105,7 +109,7 @@ public class RemindFragmentRecyclerView extends Fragment {
                 Log.d("Successfully", response.body().size() + "");
                 list = (ArrayList<Remind>) response.body();
 
-                remindAdapter = new RemindAdapter(list);
+                remindAdapter = new RemindAdapter(list, RemindFragmentRecyclerView.this);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
                 recyclerView = view.findViewById(R.id.rcvRemind);
                 recyclerView.setLayoutManager(layoutManager);
@@ -120,25 +124,12 @@ public class RemindFragmentRecyclerView extends Fragment {
                 recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-//                        alertDialogBuilder.setView(R.layout.alertdialog_remind);
-//                        AlertDialog alert = alertDialogBuilder.create();
-//                        TextView edtTime = alert.findViewById(R.id.edtTime);
-//                        TextView edtDate = alert.findViewById(R.id.edtDate);
-//                        TextView edtContent = alert.findViewById(R.id.edtContent);
-//
-                        //2000-20-20t12:12:12
-//                        final Calendar ca = Calendar.getInstance();
                         String time = list.get(position).getThoiGian();
-                        Log.e("Time",  time.substring(0, 4) + time.substring(5, 7) + time.substring(8, 10));
+                        Log.e("Time", time.substring(0, 4) + time.substring(5, 7) + time.substring(8, 10));
                         int year = Integer.parseInt(time.substring(0, 4));
-                        int month = Integer.parseInt(time.substring(5, 7)) -1;
+                        int month = Integer.parseInt(time.substring(5, 7)) - 1;
                         int day = Integer.parseInt(time.substring(8, 10));
                         Log.e("Year Month Day", year + month + day + " ");
-//                        int mYear = ca.get(Calendar.YEAR);
-//                        int mMonth = ca.get(Calendar.MONTH);
-//                        int mDay = ca.get(Calendar.DAY_OF_MONTH);
-
 
                         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                             @Override
@@ -198,9 +189,11 @@ public class RemindFragmentRecyclerView extends Fragment {
                                                         remindAdapter.notifyItemChanged(position);
 
                                                         alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-                                                        Intent intent = new Intent(getContext(), AlarmReceiver.class);
-                                                        intent.putExtra("content", content);
-                                                        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+                                                        Intent intentUpdate = new Intent(getContext(), AlarmReceiver.class);
+                                                        Log.e("Content Update", content);
+                                                        intentUpdate.putExtra("content", content);
+                                                        int iUniqueId = (int) (System.currentTimeMillis() & 0xfffffff);
+                                                        pendingIntent = PendingIntent.getBroadcast(getContext(), iUniqueId, intentUpdate, PendingIntent.FLAG_IMMUTABLE);
                                                         Log.e("calendar", simpleDateFormat.format(calendar.getTime()));
                                                         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
@@ -423,7 +416,7 @@ public class RemindFragmentRecyclerView extends Fragment {
         alerDialog.show();
     }
 
-    private void setAlarm() {
+    public void setAlarm() {
         String time = simpleDateFormat.format(calendar.getTime());
         String timeAPI = time.replace(" ", "T");
 
@@ -439,7 +432,8 @@ public class RemindFragmentRecyclerView extends Fragment {
                 alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
                 Intent intent = new Intent(getContext(), AlarmReceiver.class);
                 intent.putExtra("content", content);
-                pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+                int iUniqueId = (int) (System.currentTimeMillis() & 0xfffffff);
+                pendingIntent = PendingIntent.getBroadcast(getContext(), iUniqueId, intent, PendingIntent.FLAG_IMMUTABLE);
                 Log.e("calendar", simpleDateFormat.format(calendar.getTime()));
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
@@ -452,22 +446,25 @@ public class RemindFragmentRecyclerView extends Fragment {
             }
         });
 
-//        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(getContext(), AlarmReceiver.class);
-//        intent.putExtra("content", content);
-//        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-//        Log.e("calendar", simpleDateFormat.format(calendar.getTime()));
-//        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-//
-//        Toast.makeText(getContext(), "Thiết Lập Thành Công", Toast.LENGTH_SHORT).show();
 
     }
 
-    private void cancelAlarm() {
+    public void setAlarmForSwitchButton() {
+
+        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext(), AlarmReceiver.class);
+        intent.putExtra("content", content);
+        int iUniqueId = (int) (System.currentTimeMillis() & 0xfffffff);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), iUniqueId, intent, PendingIntent.FLAG_IMMUTABLE);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    public void cancelAlarm() {
 
         Intent intent = new Intent(getContext(), AlarmReceiver.class);
 
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        int iUniqueId = (int) (System.currentTimeMillis() & 0xfffffff);
+        pendingIntent = PendingIntent.getBroadcast(getContext(), iUniqueId, intent, PendingIntent.FLAG_IMMUTABLE);
         if (alarmManager == null) {
             alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
         }
@@ -491,5 +488,6 @@ public class RemindFragmentRecyclerView extends Fragment {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
 
 }

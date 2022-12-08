@@ -1,6 +1,10 @@
 package com.example.kattyapplication.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,8 @@ import com.example.kattyapplication.API.APIService;
 import com.example.kattyapplication.Models.Message;
 import com.example.kattyapplication.Models.Remind;
 import com.example.kattyapplication.R;
+import com.example.kattyapplication.Receivers.AlarmReceiver;
+import com.example.kattyapplication.Receivers.SwitchButton;
 
 import org.w3c.dom.Text;
 
@@ -28,12 +34,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RemindAdapter extends RecyclerView.Adapter<RemindAdapter.MyViewHolder> {
+public class RemindAdapter extends RecyclerView.Adapter<RemindAdapter.MyViewHolder>{
 
-    private ArrayList<Remind> list, list2;
+    private ArrayList<Remind> list;
+    private SwitchButton switchButton;
 
-    public RemindAdapter(ArrayList<Remind> list) {
+//    public RemindAdapter(ArrayList<Remind> list) {
+//        this.list = list;
+//    }
+
+    public RemindAdapter(ArrayList<Remind> list, SwitchButton switchButton) {
         this.list = list;
+        this.switchButton = switchButton;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -77,21 +89,46 @@ public class RemindAdapter extends RecyclerView.Adapter<RemindAdapter.MyViewHold
         holder.tvDate.setText(dateFormat);
         holder.tvContentRemind.setText(contentRemind);
         holder.swt.setChecked(ischecked);
+//        holder.swt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(holder.swt.isChecked() == false){
+//                    Remind remind = list.get(position);
+//                    remind.setTrangThai(0);
+//                    APIService.apiService.changeRemind(remind).enqueue(new Callback<Message>() {
+//                        @Override
+//                        public void onResponse(Call<Message> call, Response<Message> response) {
+//                            Log.e("Update thanh cong", response.body().getId() + "");
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Message> call, Throwable t) {
+//                            Log.d("Update that bai", t.toString());
+//                        }
+//                    });
+//                }else{
+//                    Remind remind = list.get(position);
+//                    Log.d("Remind", list.get(position).toString());
+//                    remind.setTrangThai(1);
+//                    APIService.apiService.changeRemind(remind).enqueue(new Callback<Message>() {
+//                        @Override
+//                        public void onResponse(Call<Message> call, Response<Message> response) {
+//                            Log.e("Update thanh cong", response.body().getId() + "");
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Message> call, Throwable t) {
+//                            Log.d("Update that bai", t.toString());
+//                        }
+//                    });
+//                }
+//            }
+//        });
         holder.swt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                list2 = new ArrayList();
-                APIService.apiService.getList().enqueue(new Callback<List<Remind>>() {
-                    @Override
-                    public void onResponse(Call<List<Remind>> call, Response<List<Remind>> response) {
-                        list2 = (ArrayList<Remind>) response.body();
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Remind>> call, Throwable t) {
-
-                    }
-                });
 
                 if(holder.swt.isChecked() == false){
                     Remind remind = list.get(position);
@@ -100,7 +137,7 @@ public class RemindAdapter extends RecyclerView.Adapter<RemindAdapter.MyViewHold
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Log.e("Update thanh cong", response.body().getId() + "");
-
+                            switchButton.cancelAlarm();
                         }
 
                         @Override
@@ -116,7 +153,7 @@ public class RemindAdapter extends RecyclerView.Adapter<RemindAdapter.MyViewHold
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {
                             Log.e("Update thanh cong", response.body().getId() + "");
-
+                            switchButton.setAlarmForSwitchButton();
                         }
 
                         @Override
