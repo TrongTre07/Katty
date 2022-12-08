@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="#FFE1E1"
@@ -15,7 +15,8 @@
         android:padding="10dp">
 
         <EditText
-
+            android:id="@+id/edNameAdd"
+            android:hint="Nhập tên thú cưng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -25,7 +26,8 @@
             android:textSize="25dp" />
 
         <EditText
-
+            android:id="@+id/edBreedsAdd"
+            android:hint="Nhập loài"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -33,7 +35,78 @@
             android:fontFamily="@font/fraunces"
             android:minHeight="48dp"
             android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edWeightAdd"
+            android:hint="Nhập cân nặng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edAgeAdd"
+            android:hint="Nhập tuổi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edBirthdayAdd"
+            android:hint="Nhập ngày sinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <EditText
+            android:id="@+id/edOtherInfoAdd"
+            android:hint="Nhập thêm thông tin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/rounded_corner"
+            android:fontFamily="@font/fraunces"
+            android:minHeight="48dp"
+            android:textSize="25dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
+            <TextView
+                android:id="@+id/tvCancelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="30dp"
+                android:text="Hủy"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="5dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="48dp"
+                android:text="Thêm"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/tvCancelAdd"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
