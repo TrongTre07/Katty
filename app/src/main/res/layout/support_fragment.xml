@@ -7,29 +7,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
+        android:layout_margin="10dp"
         android:background="@drawable/rounded_search"
-        android:layout_margin="10dp">
+        android:orientation="horizontal">
+
+        <AutoCompleteTextView
+            android:id="@+id/edtSearch"
+            android:layout_width="290dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corner"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:completionThreshold="1"
+            android:padding="10dp"/>
+
 
         <ImageView
-
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.025"
+            android:layout_margin="3dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/rounded_search"
             android:src="@drawable/ic_search" />
-
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/rounded_corner"
-            android:layout_gravity="center"/>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        >
+
+        <ListView
+            android:id="@+id/viewSP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="2"
+            android:background="#ffffff"
+            android:divider="#ffffff"
+            android:dividerHeight="5dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
 
 </LinearLayout>
