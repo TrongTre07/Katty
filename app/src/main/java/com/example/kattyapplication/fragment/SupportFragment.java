@@ -1,8 +1,5 @@
 package com.example.kattyapplication.fragment;
 
-import static android.content.ContentValues.TAG;
-
-import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,49 +13,36 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.kattyapplication.R;
 import com.example.kattyapplication.adapter.supportAdapter;
 import com.example.kattyapplication.api.CallApi;
-import com.example.kattyapplication.model.Message;
 import com.example.kattyapplication.model.SupportPost;
 import com.example.kattyapplication.model.support;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
-import kotlin.text.Regex;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SupportFragment extends Fragment {
 
     ArrayList<support> list;
     ArrayList<support> list2;
-
     String[] items;
+    support searchSupport;
     ArrayList<String> listItems;
     ArrayAdapter<String> adapter;
     ListView listView;
@@ -119,24 +103,47 @@ public class SupportFragment extends Fragment {
             }
         });
 
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ArrayList<String> list3 = new ArrayList<>();
+
+                for (support item:getListSupport()
+                     ) {
+                    list3.add(item.getTenTrieuChung());
+
+                }
+                ArrayAdapter adapter = new ArrayAdapter (getContext(), android.R.layout.simple_list_item_1, list3);
+                editText.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         return view;
     }
 
     public void search(String tenTrieuChung){
-        // duyệt list
         for (support item: list) {
-            // nếu trùng thì add zô list 2
-//            String sql= "ho\\w+";
-            Pattern pattern= Pattern.compile(tenTrieuChung,Pattern.UNICODE_CASE);
-            Matcher matcher= pattern.matcher(item.getTenTrieuChung());
+            String a= item.getTenTrieuChung().toUpperCase();
+            String b= tenTrieuChung.toUpperCase();
+            Pattern pattern= Pattern.compile(b);
+            Matcher matcher= pattern.matcher(a);
             if (matcher.find()){
                 Log.d("ten cho",item.getTenTrieuChung());
                 list2.add(item);
             }
         }
     }
-
-
 
 //    public void suggestionSupport(){
 //        list = getListSupport();
@@ -226,7 +233,6 @@ public class SupportFragment extends Fragment {
             @Override
             public void onResponse(Call<List<support>> call, Response<List<support>> response) {
                 list = (ArrayList<support>) response.body();
-                Log.d("Pet Infor:", "" + response.body().size());
             }
 
             @Override
