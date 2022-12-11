@@ -26,34 +26,74 @@
             android:textSize="25dp"
             android:padding="5dp"/>
 
-        <Spinner
-            android:textColor="@color/black"
-            android:layout_width="380dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/rounded_corner"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:id="@+id/spnTotal"
-            android:textSize="25dp"
-            android:paddingLeft="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <Spinner
-            android:textColor="@color/black"
-            android:layout_width="380dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_corner"
-            android:minHeight="48dp"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:id="@+id/spnMonth"
-            android:textSize="25dp"
-            android:paddingLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/rounded_corner"
+                android:padding="10dp"
+                android:text="Chọn thú cưng"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+
+            <Spinner
+                android:textColor="@color/black"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/rounded_corner"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:id="@+id/spnTotal"
+                android:textSize="25dp"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:textColor="@color/black"
+                android:text="Chọn tháng"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:textSize="20dp"
+                android:padding="10dp"
+                android:layout_gravity="center"/>
+
+            <Spinner
+                android:textColor="@color/black"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_corner"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:id="@+id/spnMonth"
+                android:textSize="25dp"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+
 
         <TextView
             android:textColor="@color/black"
-            android:layout_width="380dp"
-            android:layout_height="50dp"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corner"
             android:minHeight="48dp"
@@ -61,7 +101,7 @@
             android:id="@+id/tvResult"
             android:hint="Tổng tiền tiêu"
             android:textSize="25dp"
-            android:paddingLeft="10dp"/>
+            android:padding="10dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -96,6 +136,19 @@
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+            android:layout_margin="20dp">
+        <!--Ui component for our bar chart-->
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    </RelativeLayout>
 
     </LinearLayout>
 

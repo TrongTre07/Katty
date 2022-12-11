@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
 import com.example.kattyapplication.R;
 import com.example.kattyapplication.adapter.SpendAdapter;
 import com.example.kattyapplication.api.ApiService;
@@ -39,6 +40,11 @@ import com.example.kattyapplication.api.Message;
 import com.example.kattyapplication.model.Infor_pet;
 import com.example.kattyapplication.model.SetlistSpend;
 import com.example.kattyapplication.model.Spend;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -454,8 +460,10 @@ public class SpendFragment extends Fragment {
         tvTotal = dialog.findViewById(R.id.tvTotal);
         Spinner spnTotal = dialog.findViewById(R.id.spnTotal);
         getTenTC(spnTotal);
-
         getMonth(spnMonth);
+
+
+
 
         tvTotal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -468,10 +476,15 @@ public class SpendFragment extends Fragment {
                 String month = spnMonth.getSelectedItem().toString();
                 Log.d("month>>>> ", month);
 
+                Integer m = Integer.parseInt(month) - 1;
+
+
                 int total = 0;
+                int total1 = 0;
                 for(Spend Total : list){
                     String day = Total.getNgayChiTieu();
                     String sub = day.substring(5, 7);
+                    Integer sub2 = Integer.parseInt(sub);
 
                     if(idTC.equals(Total.getIdThuCung())){
 
@@ -479,11 +492,35 @@ public class SpendFragment extends Fragment {
                             total = total + Total.getGiaTien();
                         }
 
+                        if(sub2 == m){
+                           total1 = total1 + Total.getGiaTien();
+                        }
+
                     }
                 }
 
                 int finalTotal = total;
                 tvResult.setText(finalTotal +"VND");
+
+                int tt = total1;
+
+                PieChart pie = dialog.findViewById(R.id.pie);
+
+                ArrayList<PieEntry> data = new ArrayList<>();
+                data.add(new PieEntry(finalTotal,"chi tháng: "+ month));
+                data.add(new PieEntry(tt,"chi tháng: " + m));
+
+                PieDataSet pieDataSet = new PieDataSet(data, "Chi tiêu");
+                pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                pieDataSet.setValueTextColor(Color.BLACK);
+                pieDataSet.setValueTextSize(16f);
+
+                PieData pieData = new PieData(pieDataSet);
+                pie.setData(pieData);
+                pie.getDescription().setEnabled(false);
+                pie.setCenterText("Khoản chi tiêu");
+                pie.animate();
+
             }
         });
 
