@@ -3,6 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/divider.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/notification_custom.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_button.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_corner.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_item.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/drawable/rounded_search.xml" value="0.1725" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/activity_main.xml" value="0.1308876811594203" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/alertdialog_remind.xml" value="0.22239583333333332" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/custom_notification_small.xml" value="0.511504424778761" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/dialog_remind.xml" value="0.2234375" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/item_remind.xml" value="0.22239583333333332" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/remind_dialog_add.xml" value="0.2234375" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/remind_fragment.xml" value="0.19293478260869565" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/remind_fragment_recyclerview.xml" value="0.2234375" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/remind_item.xml" value="0.2234375" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/remind_item_recyclerview.xml" value="0.264" />
+        <entry key="..\:/DuAn1/GitHub_Clone_Project_Once/Project_Once/app/src/main/res/layout/spend_fragment.xml" value="0.2234375" />
         <entry key="..\:/Users/Mai Hoa/OneDrive/Documents/GitHub/Project_Once/app/src/main/res/drawable/border_dialog.xml" value="0.1" />
         <entry key="..\:/Users/Mai Hoa/OneDrive/Documents/GitHub/Project_Once/app/src/main/res/drawable/rounded_button.xml" value="0.1" />
         <entry key="..\:/Users/Mai Hoa/OneDrive/Documents/GitHub/Project_Once/app/src/main/res/font/fraunces_bold.xml" value="0.1" />
@@ -62,11 +79,23 @@
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/drawable/rounded_search.xml" value="0.1835" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/activity_main.xml" value="0.21784420289855072" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/activity_welcomes.xml" value="0.21784420289855072" />
-        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/pet_info_dialog_add.xml" value="0.21784420289855072" />
-        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/pet_info_dialog_update.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/pet_info_dialog_add.xml" value="0.4" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/pet_info_dialog_update.xml" value="0.2" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/pet_info_fragment.xml" value="0.21784420289855072" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/pet_info_item.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/remind_dialog_add.xml" value="0.21784420289855072" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/remind_dialog_update.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/remind_fragment.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/remind_fragment_recyclerview.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/remind_item.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/remind_item_recyclerview.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/spend_dialog_add.xml" value="0.176" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/spend_dialog_update.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/spend_fragment.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/spend_statistical.xml" value="0.2" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/support_dialog.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/support_fragment.xml" value="0.21784420289855072" />
+        <entry key="..\:/gitHub/Project_Once/app/src/main/res/layout/support_item.xml" value="0.21784420289855072" />
         <entry key="..\:/gitHub/Project_Once/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
