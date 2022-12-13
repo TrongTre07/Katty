@@ -21,6 +21,18 @@ public class Pet {
         return tenThuCung;
     }
 
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "tenThuCung='" + tenThuCung + '\'' +
+                ", loai='" + loai + '\'' +
+                ", canNang=" + canNang +
+                ", tuoi=" + tuoi +
+                ", ngaySinh='" + ngaySinh + '\'' +
+                ", thongTinKhac='" + thongTinKhac + '\'' +
+                '}';
+    }
+
     public void setTenThuCung(String tenThuCung) {
         this.tenThuCung = tenThuCung;
     }

@@ -1,6 +1,7 @@
 package com.example.kattyapplication.fragment;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -35,8 +37,11 @@ import com.example.kattyapplication.model.Pet;
 import com.example.kattyapplication.model.PetInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,7 +53,7 @@ public class PetInfoFragment extends Fragment {
     ArrayList<Pet> listpet;
     FloatingActionButton floatAdd;
     Dialog dialog;
-    EditText edName, edBreeds, edWeight, edAge, edBirthday, edOtherInfo;
+    EditText edName, edBreeds, edWeight, edAge, edOtherInfo;
     TextView tvCancel, tvAdd, tvUpdate;
     TextView tvName, tvBreeds, tvWeight, tvAge, tvBirthday, tvOtherInfo;
     PetInfoAdapter adapter;
@@ -120,7 +125,6 @@ public class PetInfoFragment extends Fragment {
         });
     }
 
-
     public void openDialogAdd(final Context context) {
 
         dialog = new Dialog(context);
@@ -129,7 +133,7 @@ public class PetInfoFragment extends Fragment {
         edBreeds = dialog.findViewById(R.id.edBreedsAdd);
         edWeight = dialog.findViewById(R.id.edWeightAdd);
         edAge = dialog.findViewById(R.id.edAgeAdd);
-        edBirthday = dialog.findViewById(R.id.edBirthdayAdd);
+        tvBirthday = dialog.findViewById(R.id.tvBirthdayAdd);
         edOtherInfo = dialog.findViewById(R.id.edOtherInfoAdd);
         tvCancel = dialog.findViewById(R.id.tvCancelAdd);
         tvAdd = dialog.findViewById(R.id.tvAdd);
@@ -142,7 +146,6 @@ public class PetInfoFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-
         tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,17 +153,18 @@ public class PetInfoFragment extends Fragment {
                 String breed = edBreeds.getText().toString();
                 Float  weight= Float.parseFloat(edWeight.getText().toString()) ;
                 Integer age = Integer.parseInt( edAge.getText().toString());
-                String birday= edBirthday.getText().toString();
+                String birthday= tvBirthday.getText().toString();
                 String otherinfo = edOtherInfo.getText().toString();
-                Pet item = new Pet(name, breed,weight,age,birday,otherinfo);
-
+                Pet item = new Pet(name, breed,weight,age,birthday,otherinfo);
 
                 if (validate() > 0) {
                     item.setTenThuCung(edName.getText().toString());
                     item.setLoai(edBreeds.getText().toString());
                     item.setCanNang(Float.parseFloat(edWeight.getText().toString()));
                     item.setTuoi(Integer.parseInt(edAge.getText().toString()));
-                    item.setNgaySinh(edBirthday.getText().toString());
+                    String birth = tvBirthday.getText().toString();
+                    String birthFormat = birth.replace("/", "-");
+                    item.setNgaySinh(birthFormat);
                     item.setThongTinKhac(edOtherInfo.getText().toString());
                     Pet pet= new Pet( item.getTenThuCung(), item.getLoai(), item.getCanNang(), item.getTuoi(), item.getNgaySinh() ,item.getThongTinKhac());
                     APIService.apiService.addPetInfo(pet).enqueue(new Callback<Message>() {
@@ -190,6 +194,42 @@ public class PetInfoFragment extends Fragment {
         });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+        Calendar calendar = Calendar.getInstance();
+
+
+        tvBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                                String ngay= "";
+                                String thang= "";
+                                if(i2 < 10){
+                                    ngay = "0" + i2;
+                                }else{
+                                    ngay = String.valueOf(i2);
+                                }
+
+                                if((i1 + 1) < 10){
+                                    thang = "0" + (i1 + 1);
+                                }
+                                else{
+                                    thang = String.valueOf((i1 + 1));
+                                }
+
+//                                tvBirthday.setText(ngay + "/" + thang + "/" + i);
+                                tvBirthday.setText(i + "-" + thang + "-" + ngay);
+                            }
+                        },
+                        calendar.get(calendar.YEAR),
+                        calendar.get(calendar.MONTH),
+                        calendar.get(calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
+
     }
 
     public void openDialogUpdate(final Context context, int id) {
@@ -201,7 +241,7 @@ public class PetInfoFragment extends Fragment {
         edBreeds = dialog.findViewById(R.id.edBreedsUpdate);
         edWeight = dialog.findViewById(R.id.edWeightUpdate);
         edAge = dialog.findViewById(R.id.edAgeUpdate);
-        edBirthday = dialog.findViewById(R.id.edBirthdayUpdate);
+        tvBirthday = dialog.findViewById(R.id.tvBirthdayUpdate);
         edOtherInfo = dialog.findViewById(R.id.edOtherInfoUpdate);
         tvCancel = dialog.findViewById(R.id.tvCancelUpdate);
         tvUpdate = dialog.findViewById(R.id.tvUpdate);
@@ -213,7 +253,7 @@ public class PetInfoFragment extends Fragment {
         String NS = item.getNgaySinh();
         String sub = NS.substring(0,10);
         edAge.setText(String.valueOf(item.getTuoi()));
-        edBirthday.setText(sub);
+        tvBirthday.setText(sub);
         edOtherInfo.setText(String.valueOf(item.getThongTinKhac()));
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,9 +269,9 @@ public class PetInfoFragment extends Fragment {
                 String breed = edBreeds.getText().toString();
                 Float  weight= Float.parseFloat(edWeight.getText().toString()) ;
                 Integer age = Integer.parseInt( edAge.getText().toString());
-                String birday= edBirthday.getText().toString();
+                String birthday= tvBirthday.getText().toString();
                 String otherinfo = edOtherInfo.getText().toString();
-                PetInfo item = new PetInfo(id, name, breed,weight,age,birday,otherinfo);
+                PetInfo item = new PetInfo(id, name, breed,weight,age,birthday,otherinfo);
 
 
                 if (validate() > 0) {
@@ -239,8 +279,8 @@ public class PetInfoFragment extends Fragment {
                     item.setLoai(edBreeds.getText().toString());
                     item.setCanNang(Float.parseFloat(edWeight.getText().toString()));
                     item.setTuoi(Integer.parseInt(edAge.getText().toString()));
-                    item.setNgaySinh(edBirthday.getText().toString());
-                    item.setLoai(edOtherInfo.getText().toString());
+                    item.setNgaySinh(tvBirthday.getText().toString());
+                    item.setThongTinKhac(edOtherInfo.getText().toString());
                     PetInfo petInfo = new PetInfo(id, item.getTenThuCung(), item.getLoai(), item.getCanNang(), item.getTuoi(), item.getNgaySinh() ,item.getThongTinKhac());
                     APIService.apiService.UpdatePetInfo(petInfo).enqueue(new Callback<Message>() {
                         @Override
@@ -268,6 +308,41 @@ public class PetInfoFragment extends Fragment {
             }
         });
         dialog.show();
+        Calendar calendar = Calendar.getInstance();
+
+
+        tvBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog dialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                                String ngay= "";
+                                String thang= "";
+                                if(i2 < 10){
+                                    ngay = "0" + i2;
+                                }else{
+                                    ngay = String.valueOf(i2);
+                                }
+
+                                if((i1 + 1) < 10){
+                                    thang = "0" + (i1 + 1);
+                                }
+                                else{
+                                    thang = String.valueOf((i1 + 1));
+                                }
+
+                                tvBirthday.setText( i+ "/" + thang + "/" +ngay);
+                            }
+                        },
+                        calendar.get(calendar.YEAR),
+                        calendar.get(calendar.MONTH),
+                        calendar.get(calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
+
     }
 
     public void xoa(int id) {
@@ -312,8 +387,29 @@ public class PetInfoFragment extends Fragment {
 
     public int validate() {
         int check = 1;
-        if (edName.getText().length() == 0 || edBreeds.getText().length() == 0) {
+
+        if (edName.getText().length() == 0 || edBreeds.getText().length() == 0 || edWeight.getText().length() == 0  || edAge.getText().length() == 0 || edOtherInfo.getText().length() == 0 ) {
             Toast.makeText(getContext(), "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+        String ten = edName.getText().toString();
+        String loai = edBreeds.getText().toString();
+        if(!Pattern.matches("[a-zA-Z0-9]+", ten)){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+        if(!Pattern.matches("[a-zA-Z0-9]+", loai)){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+        String tuoi = edAge.getText().toString();
+        String canNang = edWeight.getText().toString();
+        if(!Pattern.matches("[0-9]+",tuoi)){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng tuoi", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+        if(!Pattern.matches("[0-9]+",canNang)){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng can nang", Toast.LENGTH_SHORT).show();
             check = -1;
         }
 
