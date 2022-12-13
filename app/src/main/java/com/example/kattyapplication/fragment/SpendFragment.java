@@ -51,8 +51,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,6 +72,7 @@ public class SpendFragment extends Fragment {
     Spend item;
     View view;
     ProgressBar pb;
+    Spinner spnTenTCUpdate, spnTenTCAdd, spnMonth, spnTotal;
 
 
     @Nullable
@@ -173,7 +173,7 @@ public class SpendFragment extends Fragment {
         edtLoaiTD = dialog.findViewById(R.id.edtLoaitdAdd);
         edtGiatien = dialog.findViewById(R.id.edtGiatienADD);
         tvDate = dialog.findViewById(R.id.tvDateAdd);
-        Spinner spnTenTCAdd = dialog.findViewById(R.id.spnTenTCAdd);
+        spnTenTCAdd = dialog.findViewById(R.id.spnTenTCAdd);
         tvCancel = dialog.findViewById(R.id.tvCancelAdd);
         tvAdd = dialog.findViewById(R.id.tvAdd);
 
@@ -299,7 +299,7 @@ public class SpendFragment extends Fragment {
         edtLoaiTD = dialog.findViewById(R.id.edtLoaitdUpdate);
         edtGiatien = dialog.findViewById(R.id.edtGiatienUdate);
         tvDate = dialog.findViewById(R.id.tvDateUpdate);
-        Spinner spnTenTCUpdate = dialog.findViewById(R.id.spnTenTCUpdate);
+        spnTenTCUpdate = dialog.findViewById(R.id.spnTenTCUpdate);
         tvCancel = dialog.findViewById(R.id.tvCancelUpdate);
         tvUpdate = dialog.findViewById(R.id.tvUpdate);
         getTenTC(spnTenTCUpdate);
@@ -455,10 +455,10 @@ public class SpendFragment extends Fragment {
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.spend_statistical);
         tvResult = dialog.findViewById(R.id.tvResult);
-        Spinner spnMonth = dialog.findViewById(R.id.spnMonth);
+        spnMonth = dialog.findViewById(R.id.spnMonth);
         tvCancel = dialog.findViewById(R.id.tvCancelS);
         tvTotal = dialog.findViewById(R.id.tvTotal);
-        Spinner spnTotal = dialog.findViewById(R.id.spnTotal);
+        spnTotal = dialog.findViewById(R.id.spnTotal);
         getTenTC(spnTotal);
         getMonth(spnMonth);
 
@@ -581,8 +581,20 @@ public class SpendFragment extends Fragment {
 
     public int validate() {
         int check = 1;
-        if (edtLoaiTD.getText().length() == 0 || edtGiatien.getText().length() == 0) {
+        if (edtLoaiTD.getText().length() == 0 || edtGiatien.getText().length() == 0 ) {
             Toast.makeText(getContext(), "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+
+        String loaitd = edtLoaiTD.getText().toString();
+        String gia = edtGiatien.getText().toString();
+        if(!Pattern.matches("[a-zA-Z0-9]+", loaitd)){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+
+        if(!Pattern.matches("[0-9]+", gia)){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng gia", Toast.LENGTH_SHORT).show();
             check = -1;
         }
 
