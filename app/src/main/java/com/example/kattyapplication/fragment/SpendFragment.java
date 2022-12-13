@@ -41,14 +41,18 @@ import com.example.kattyapplication.adapter.SpendAdapter;
 import com.example.kattyapplication.model.Infor_pet;
 import com.example.kattyapplication.model.SetlistSpend;
 import com.example.kattyapplication.model.Spend;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +73,7 @@ public class SpendFragment extends Fragment {
     Spend item;
     View view;
     ProgressBar pb;
+    Spinner spnTenTCUpdate, spnTenTCAdd, spnMonth, spnTotal;
 
 
     @Nullable
@@ -169,7 +174,7 @@ public class SpendFragment extends Fragment {
         edtLoaiTD = dialog.findViewById(R.id.edtLoaitdAdd);
         edtGiatien = dialog.findViewById(R.id.edtGiatienADD);
         tvDate = dialog.findViewById(R.id.tvDateAdd);
-        Spinner spnTenTCAdd = dialog.findViewById(R.id.spnTenTCAdd);
+        spnTenTCAdd = dialog.findViewById(R.id.spnTenTCAdd);
         tvCancel = dialog.findViewById(R.id.tvCancelAdd);
         tvAdd = dialog.findViewById(R.id.tvAdd);
 
@@ -295,7 +300,7 @@ public class SpendFragment extends Fragment {
         edtLoaiTD = dialog.findViewById(R.id.edtLoaitdUpdate);
         edtGiatien = dialog.findViewById(R.id.edtGiatienUdate);
         tvDate = dialog.findViewById(R.id.tvDateUpdate);
-        Spinner spnTenTCUpdate = dialog.findViewById(R.id.spnTenTCUpdate);
+        spnTenTCUpdate = dialog.findViewById(R.id.spnTenTCUpdate);
         tvCancel = dialog.findViewById(R.id.tvCancelUpdate);
         tvUpdate = dialog.findViewById(R.id.tvUpdate);
         getTenTC(spnTenTCUpdate);
@@ -451,13 +456,15 @@ public class SpendFragment extends Fragment {
         dialog = new Dialog(context);
         dialog.setContentView(R.layout.spend_statistical);
         tvResult = dialog.findViewById(R.id.tvResult);
-        Spinner spnMonth = dialog.findViewById(R.id.spnMonth);
+        spnMonth = dialog.findViewById(R.id.spnMonth);
         tvCancel = dialog.findViewById(R.id.tvCancelS);
         tvTotal = dialog.findViewById(R.id.tvTotal);
-        Spinner spnTotal = dialog.findViewById(R.id.spnTotal);
+        spnTotal = dialog.findViewById(R.id.spnTotal);
         getTenTC(spnTotal);
-
         getMonth(spnMonth);
+
+
+
 
         tvTotal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -470,10 +477,15 @@ public class SpendFragment extends Fragment {
                 String month = spnMonth.getSelectedItem().toString();
                 Log.d("month>>>> ", month);
 
+                Integer m = Integer.parseInt(month) - 1;
+
+
                 int total = 0;
+                int total1 = 0;
                 for(Spend Total : list){
                     String day = Total.getNgayChiTieu();
                     String sub = day.substring(5, 7);
+                    Integer sub2 = Integer.parseInt(sub);
 
                     if(idTC.equals(Total.getIdThuCung())){
 
@@ -481,11 +493,35 @@ public class SpendFragment extends Fragment {
                             total = total + Total.getGiaTien();
                         }
 
+                        if(sub2 == m){
+                           total1 = total1 + Total.getGiaTien();
+                        }
+
                     }
                 }
 
                 int finalTotal = total;
                 tvResult.setText(finalTotal +"VND");
+
+                int tt = total1;
+
+                PieChart pie = dialog.findViewById(R.id.pie);
+
+                ArrayList<PieEntry> data = new ArrayList<>();
+                data.add(new PieEntry(finalTotal,"chi tháng: "+ month));
+                data.add(new PieEntry(tt,"chi tháng: " + m));
+
+                PieDataSet pieDataSet = new PieDataSet(data, "Chi tiêu");
+                pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                pieDataSet.setValueTextColor(Color.BLACK);
+                pieDataSet.setValueTextSize(16f);
+
+                PieData pieData = new PieData(pieDataSet);
+                pie.setData(pieData);
+                pie.getDescription().setEnabled(false);
+                pie.setCenterText("Khoản chi tiêu");
+                pie.animate();
+
             }
         });
 
@@ -546,8 +582,22 @@ public class SpendFragment extends Fragment {
 
     public int validate() {
         int check = 1;
-        if (edtLoaiTD.getText().length() == 0 || edtGiatien.getText().length() == 0) {
+        if (edtLoaiTD.getText().length() == 0 || edtGiatien.getText().length() == 0 ) {
             Toast.makeText(getContext(), "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+
+        String loaitd = edtLoaiTD.getText().toString();
+        String gia = edtGiatien.getText().toString();
+        // nếu chỉ nhập ký tự đặt biệt thì sẽ bắt lỗi còn nếu nhập chả chử thường vào thì không
+        // tại vì có đôi khi người dùng sẽ cần nhập một số ký tự đặt biệt vào chẳn hạng như để chú thích
+        if(Pattern.matches("[@#$%!]+",loaitd )){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
+            check = -1;
+        }
+
+        if(!Pattern.matches("[0-9]+", gia)){
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
             check = -1;
         }
 

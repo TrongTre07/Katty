@@ -70,28 +70,28 @@
 
             <TextView
                 android:textColor="@color/black"
-                android:id="@+id/tvCancelAdd"
+                android:id="@+id/tvAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="5dp"
-                android:text="Hủy"
+                android:text="Thêm"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:textColor="@color/black"
-                android:id="@+id/tvAdd"
+                android:text="Hủy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="20dp"
-                android:text="Thêm"
+                android:id="@+id/tvCancelAdd"
                 android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/tvCancelAdd"
+                app:layout_constraintEnd_toStartOf="@+id/tvAdd"
                 app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

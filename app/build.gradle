@@ -11,7 +11,6 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -53,4 +52,5 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
