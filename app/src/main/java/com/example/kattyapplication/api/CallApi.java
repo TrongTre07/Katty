@@ -1,4 +1,4 @@
-package com.example.kattyapplication.api;
+package com.example.kattyapplication.API;
 import com.example.kattyapplication.model.Message;
 import com.example.kattyapplication.model.SupportPost;
 import com.example.kattyapplication.model.support;

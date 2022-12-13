@@ -120,7 +120,7 @@ public class PetInfoFragment extends Fragment {
             @Override
             public void onFailure(Call<List<PetInfo>> call, Throwable t) {
                 Log.d("Got Error:", t.toString());
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Lỗi", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -149,15 +149,17 @@ public class PetInfoFragment extends Fragment {
         tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = edName.getText().toString();
-                String breed = edBreeds.getText().toString();
-                Float  weight= Float.parseFloat(edWeight.getText().toString()) ;
-                Integer age = Integer.parseInt( edAge.getText().toString());
-                String birthday= tvBirthday.getText().toString();
-                String otherinfo = edOtherInfo.getText().toString();
-                Pet item = new Pet(name, breed,weight,age,birthday,otherinfo);
 
                 if (validate() > 0) {
+
+                    String name = edName.getText().toString();
+                    String breed = edBreeds.getText().toString();
+                    Float weight= Float.parseFloat(edWeight.getText().toString()) ;
+                    Integer age = Integer.parseInt( edAge.getText().toString());
+                    String birthday= tvBirthday.getText().toString();
+                    String otherinfo = edOtherInfo.getText().toString();
+                    Pet item = new Pet(name, breed,weight,age,birthday,otherinfo);
+
                     item.setTenThuCung(edName.getText().toString());
                     item.setLoai(edBreeds.getText().toString());
                     item.setCanNang(Float.parseFloat(edWeight.getText().toString()));
@@ -174,18 +176,18 @@ public class PetInfoFragment extends Fragment {
                             Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                 //thanh cong
-                                Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Thêm thành công", Toast.LENGTH_SHORT).show();
                                 callApiPetInfo();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Add Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Thêm không được", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Lỗi", Toast.LENGTH_LONG).show();
                         }
                     });
                     dialog.dismiss();
@@ -265,16 +267,19 @@ public class PetInfoFragment extends Fragment {
         tvUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = edName.getText().toString();
-                String breed = edBreeds.getText().toString();
-                Float  weight= Float.parseFloat(edWeight.getText().toString()) ;
-                Integer age = Integer.parseInt( edAge.getText().toString());
-                String birthday= tvBirthday.getText().toString();
-                String otherinfo = edOtherInfo.getText().toString();
-                PetInfo item = new PetInfo(id, name, breed,weight,age,birthday,otherinfo);
 
 
                 if (validate() > 0) {
+
+                    String name = edName.getText().toString();
+                    String breed = edBreeds.getText().toString();
+                    Float  weight= Float.parseFloat(edWeight.getText().toString()) ;
+                    Integer age = Integer.parseInt( edAge.getText().toString());
+                    String birthday= tvBirthday.getText().toString();
+                    String otherinfo = edOtherInfo.getText().toString();
+                    PetInfo item = new PetInfo(id, name, breed,weight,age,birthday,otherinfo);
+
+
                     item.setTenThuCung(edName.getText().toString());
                     item.setLoai(edBreeds.getText().toString());
                     item.setCanNang(Float.parseFloat(edWeight.getText().toString()));
@@ -289,18 +294,18 @@ public class PetInfoFragment extends Fragment {
                             Log.d("test",message.getId()+"");
                             if(message.getId() == 1){
                                 //thanh cong
-                                Toast.makeText(context, "Update", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                 callApiPetInfo();
 
                             }else {
                                 //that bai
-                                Toast.makeText(context, "Update Fail", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                             }Toast.makeText(context, message.getContent(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onFailure(Call<Message> call, Throwable t) {
-                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Lỗi", Toast.LENGTH_LONG).show();
                         }
                     });
                     dialog.dismiss();
@@ -359,16 +364,16 @@ public class PetInfoFragment extends Fragment {
                     public void onResponse(Call<Message> call, Response<Message> response) {
                         Message message = response.body();
                         if(message.getId() == 1){
-                            Toast.makeText(getContext(), "Delete successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_LONG).show();
                             callApiPetInfo();
                         }else{
-                            Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Không xóa được", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Message> call, Throwable t) {
-                        Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Lỗi", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -388,28 +393,28 @@ public class PetInfoFragment extends Fragment {
     public int validate() {
         int check = 1;
 
-        if (edName.getText().length() == 0 || edBreeds.getText().length() == 0 || edWeight.getText().length() == 0  || edAge.getText().length() == 0 || edOtherInfo.getText().length() == 0 ) {
+        if (edName.getText().length() == 0 || edBreeds.getText().length() == 0 || edWeight.getText().length() == 0  || edAge.getText().length() == 0 ) {
             Toast.makeText(getContext(), "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             check = -1;
         }
         String ten = edName.getText().toString();
         String loai = edBreeds.getText().toString();
-        if(!Pattern.matches("[a-zA-Z0-9]+", ten)){
-            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
-            check = -1;
-        }
-        if(!Pattern.matches("[a-zA-Z0-9]+", loai)){
-            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
-            check = -1;
-        }
+//        if(!Pattern.matches("[a-zA-Z0-9]+", ten)){
+//            Toast.makeText(getContext(), "Không chứa kí tự đặc biệt", Toast.LENGTH_SHORT).show();
+//            check = -1;
+//        }
+//        if(!Pattern.matches("[a-zA-Z0-9]+", loai)){
+//            Toast.makeText(getContext(), "Không chứa kí tự đặc biệt", Toast.LENGTH_SHORT).show();
+//            check = -1;
+//        }
         String tuoi = edAge.getText().toString();
         String canNang = edWeight.getText().toString();
         if(!Pattern.matches("[0-9]+",tuoi)){
-            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng tuoi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Bạn phải nhập số", Toast.LENGTH_SHORT).show();
             check = -1;
         }
         if(!Pattern.matches("[0-9]+",canNang)){
-            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng can nang", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Bạn phải nhập số", Toast.LENGTH_SHORT).show();
             check = -1;
         }
 
