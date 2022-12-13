@@ -69,28 +69,28 @@
 
             <TextView
                 android:textColor="@color/black"
-                android:id="@+id/tvCancelUpdate"
+                android:text="Cập nhật"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="5dp"
-                android:text="Hủy"
+                android:id="@+id/tvUpdate"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tvCancelUpdate"
+                android:text="Hủy"
                 android:textColor="@color/black"
-                android:id="@+id/tvUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="20dp"
-                android:text="Cập nhật"
                 android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/tvCancelUpdate"
+                app:layout_constraintEnd_toStartOf="@+id/tvUpdate"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

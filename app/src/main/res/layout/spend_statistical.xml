@@ -22,7 +22,7 @@
             android:layout_marginBottom="2dp"
             android:fontFamily="@font/fraunces_semibold"
             android:gravity="center"
-            android:text="Tính Tổng Chi Tiêu"
+            android:text="Thống Kê Chi Tiêu"
             android:textSize="25dp"
             android:padding="5dp"/>
 
@@ -110,28 +110,28 @@
 
             <TextView
                 android:textColor="@color/black"
-                android:id="@+id/tvCancelS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="5dp"
-                android:text="Hủy"
                 android:textSize="20dp"
+                android:text="Tính"
+                android:id="@+id/tvTotal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:textColor="@color/black"
-                android:id="@+id/tvTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="20dp"
-                android:text="Tính"
+                android:id="@+id/tvCancelS"
                 android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/tvCancelS"
+                android:text="Hủy"
+                app:layout_constraintEnd_toStartOf="@+id/tvTotal"
                 app:layout_constraintTop_toTopOf="parent"
                 />
 

@@ -594,7 +594,7 @@ public class SpendFragment extends Fragment {
         }
 
         if(!Pattern.matches("[0-9]+", gia)){
-            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng gia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
             check = -1;
         }
 
