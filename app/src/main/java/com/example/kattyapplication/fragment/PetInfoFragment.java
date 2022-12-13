@@ -305,6 +305,7 @@ public class PetInfoFragment extends Fragment {
                 }
             }
         });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
         Calendar calendar = Calendar.getInstance();
 

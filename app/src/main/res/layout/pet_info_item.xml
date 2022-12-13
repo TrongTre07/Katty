@@ -22,15 +22,14 @@
             android:padding="10dp">
 
             <TextView
-                android:paddingLeft="5dp"
+                android:paddingLeft="8dp"
                 android:id="@+id/tvName"
                 android:textSize="25dp"
                 android:textColor="@color/black"
                 android:background="@drawable/rounded_corner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:fontFamily="@font/fraunces"/>
+                android:layout_marginBottom="2dp"/>
 
 <!--            <TextView-->
 <!--                android:id="@+id/tvBreeds"-->

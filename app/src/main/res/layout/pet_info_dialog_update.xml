@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:background="@drawable/rounded_corner"
-            android:fontFamily="@font/fraunces"
+            android:paddingLeft="8dp"
             android:minHeight="48dp"
             android:textSize="25dp" />
 
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
-            android:fontFamily="@font/fraunces"
+            android:paddingLeft="8dp"
             android:minHeight="48dp"
             android:textSize="25dp" />
         <EditText
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
-            android:fontFamily="@font/fraunces"
+            android:paddingLeft="8dp"
             android:minHeight="48dp"
             android:textSize="25dp" />
         <EditText
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
-            android:fontFamily="@font/fraunces"
+            android:paddingLeft="8dp"
             android:minHeight="48dp"
             android:textSize="25dp" />
         <TextView
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
-            android:fontFamily="@font/fraunces"
+            android:paddingLeft="8dp"
             android:minHeight="48dp"
             android:textSize="25dp" />
         <EditText
@@ -73,42 +74,41 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:background="@drawable/rounded_corner"
-            android:fontFamily="@font/fraunces"
+            android:paddingLeft="8dp"
             android:minHeight="48dp"
             android:textSize="25dp" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp">
 
-            <TextView
-                android:paddingLeft="5dp"
-                android:id="@+id/tvCancelUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="30dp"
-                android:text="Hủy"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:paddingLeft="5dp"
                 android:id="@+id/tvUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="5dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="48dp"
+                android:paddingLeft="5dp"
                 android:text="Cập nhật"
                 android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/tvCancelUpdate"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tvCancelUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="10dp"
+                android:paddingLeft="5dp"
+                android:text="Hủy"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvUpdate"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
