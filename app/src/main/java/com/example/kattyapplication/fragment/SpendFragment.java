@@ -177,25 +177,6 @@ public class SpendFragment extends Fragment {
         tvCancel = dialog.findViewById(R.id.tvCancelAdd);
         tvAdd = dialog.findViewById(R.id.tvAdd);
 
-        edtLoaiTD.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
-                    closeKeyBoard();
-                }
-                return false;
-            }
-        });
-        edtGiatien.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
-                    closeKeyBoard();
-                }
-                return false;
-            }
-        });
-
 
          getTenTC(spnTenTCAdd);
 
@@ -303,25 +284,6 @@ public class SpendFragment extends Fragment {
         tvCancel = dialog.findViewById(R.id.tvCancelUpdate);
         tvUpdate = dialog.findViewById(R.id.tvUpdate);
         getTenTC(spnTenTCUpdate);
-
-        edtLoaiTD.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
-                    closeKeyBoard();
-                }
-                return false;
-            }
-        });
-        edtGiatien.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER){
-                    closeKeyBoard();
-                }
-                return false;
-            }
-        });
 
         edtLoaiTD.setText(String.valueOf(item.getLoaiTieuDung()));
         edtGiatien.setText(String.valueOf(item.getGiaTien()));
@@ -636,13 +598,6 @@ public class SpendFragment extends Fragment {
         });
         return list;
     }
-
-    public void closeKeyBoard(){
-        view = getActivity().getCurrentFocus();
-        if (view != null){
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
+    
 
 }
