@@ -13,6 +13,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.viewmodel.CreationExtras;
 
 import com.example.kattyapplication.R;
 import com.example.kattyapplication.adapter.supportAdapter;
@@ -50,6 +53,7 @@ public class SupportFragment extends Fragment {
     supportAdapter adapterSp;
     View view;
     ProgressBar progressBar;
+    ImageView imageView;
 
     @Nullable
     @Override
@@ -57,6 +61,7 @@ public class SupportFragment extends Fragment {
         view = inflater.inflate(R.layout.support_fragment, container, false);
         listView = (ListView) view.findViewById(R.id.viewSP);
         editText =  (AutoCompleteTextView) view.findViewById(R.id.edtSearch);
+        imageView = view.findViewById(R.id.cancelSearch);
         progressBar = view.findViewById(R.id.progressBar);
 
         progressBar.setVisibility(view.VISIBLE);
@@ -68,7 +73,7 @@ public class SupportFragment extends Fragment {
 //        CallApiSupportByID(1);
 //        SearchViewSupport();
 
-        //support task
+
 
         //bắt sự kiện khi click vào nút tìm kiếm
         editText.setOnKeyListener(new View.OnKeyListener() {
@@ -113,13 +118,24 @@ public class SupportFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ArrayList<String> list3 = new ArrayList<>();
 
-                for (support item:getListSupport()
-                     ) {
+                for (support item:getListSupport()) {
                     list3.add(item.getTenTrieuChung());
-
                 }
                 ArrayAdapter adapter = new ArrayAdapter (getContext(), android.R.layout.simple_list_item_1, list3);
                 editText.setAdapter(adapter);
+
+                if(editText.getText().toString().isEmpty()){
+                    imageView.setVisibility(View.GONE);
+                }else{
+                    imageView.setVisibility(View.VISIBLE);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            editText.setText("");
+                        }
+                    });
+                }
+
 
             }
 
@@ -131,6 +147,25 @@ public class SupportFragment extends Fragment {
 
         return view;
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        String search = editText.getText().toString();
+//        if(search.isEmpty()){
+//            imageView.setVisibility(View.GONE);
+//        }else{
+//            imageView.setVisibility(View.VISIBLE);
+//
+//        }
+//
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                editText.setText("");
+//            }
+//        });
+//    }
 
     public void search(String tenTrieuChung){
         for (support item: list) {

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corner"
             android:fontFamily="@font/fraunces"
-            android:padding="5dp"
+            android:padding="8dp"
             android:textSize="20sp" />
 
         <!--        <TextView-->
