@@ -588,7 +588,9 @@ public class SpendFragment extends Fragment {
 
         String loaitd = edtLoaiTD.getText().toString();
         String gia = edtGiatien.getText().toString();
-        if(!Pattern.matches("[a-zA-Z0-9]+", loaitd)){
+        // nếu chỉ nhập ký tự đặt biệt thì sẽ bắt lỗi còn nếu nhập chả chử thường vào thì không
+        // tại vì có đôi khi người dùng sẽ cần nhập một số ký tự đặt biệt vào chẳn hạng như để chú thích
+        if(Pattern.matches("[@#$%!]+",loaitd )){
             Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
             check = -1;
         }
