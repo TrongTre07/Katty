@@ -55,8 +55,8 @@
             android:fontFamily="@font/fraunces"
             android:minHeight="48dp"
             android:textSize="25dp" />
-        <EditText
-            android:id="@+id/edBirthdayAdd"
+        <TextView
+            android:id="@+id/tvBirthdayAdd"
             android:hint="Nhập ngày sinh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
