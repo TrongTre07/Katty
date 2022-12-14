@@ -553,13 +553,13 @@ public class SpendFragment extends Fragment {
         String gia = edtGiatien.getText().toString();
         // nếu chỉ nhập ký tự đặt biệt thì sẽ bắt lỗi còn nếu nhập chả chử thường vào thì không
         // tại vì có đôi khi người dùng sẽ cần nhập một số ký tự đặt biệt vào chẳn hạng như để chú thích
-        if(Pattern.matches("[@#$%!]+",loaitd )){
-            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
-            check = -1;
-        }
+//        if(Pattern.matches("[@#$%!]+",loaitd )){
+//            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
+//            check = -1;
+//        }
 
         if(!Pattern.matches("[0-9]+", gia)){
-            Toast.makeText(getContext(), "Bạn phải nhập đúng định dạng", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Bạn phải nhập số", Toast.LENGTH_SHORT).show();
             check = -1;
         }
 
