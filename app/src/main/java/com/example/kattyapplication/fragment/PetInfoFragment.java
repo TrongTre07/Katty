@@ -394,30 +394,30 @@ public class PetInfoFragment extends Fragment {
     public int validate() {
         int check = 1;
 
-        if (edName.getText().length() == 0 || edBreeds.getText().length() == 0 || edWeight.getText().length() == 0  || edAge.getText().length() == 0 ) {
-            Toast.makeText(getContext(), "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-            check = -1;
-        }
-        String ten = edName.getText().toString();
-        String loai = edBreeds.getText().toString();
-//        if(!Pattern.matches("[a-zA-Z0-9]+", ten)){
-//            Toast.makeText(getContext(), "Không chứa kí tự đặc biệt", Toast.LENGTH_SHORT).show();
+//        if (edName.getText().length() == 0 || edBreeds.getText().length() == 0 || edWeight.getText().length() == 0  || edAge.getText().length() == 0 ) {
+//            Toast.makeText(getContext(), "Bạn phải nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
 //            check = -1;
 //        }
-//        if(!Pattern.matches("[a-zA-Z0-9]+", loai)){
-//            Toast.makeText(getContext(), "Không chứa kí tự đặc biệt", Toast.LENGTH_SHORT).show();
-//            check = -1;
-//        }
+//        String ten = edName.getText().toString();
+//        String loai = edBreeds.getText().toString();
+////        if(!Pattern.matches("[a-zA-Z0-9]+", ten)){
+////            Toast.makeText(getContext(), "Không chứa kí tự đặc biệt", Toast.LENGTH_SHORT).show();
+////            check = -1;
+////        }
+////        if(!Pattern.matches("[a-zA-Z0-9]+", loai)){
+////            Toast.makeText(getContext(), "Không chứa kí tự đặc biệt", Toast.LENGTH_SHORT).show();
+////            check = -1;
+////        }
         String tuoi = edAge.getText().toString();
-        String canNang = edWeight.getText().toString();
+//        String canNang = edWeight.getText().toString();
         if(!Pattern.matches("[0-9]+",tuoi)){
             Toast.makeText(getContext(), "Bạn phải nhập số", Toast.LENGTH_SHORT).show();
             check = -1;
         }
-        if(!Pattern.matches("[0-9]+",canNang)){
-            Toast.makeText(getContext(), "Bạn phải nhập số", Toast.LENGTH_SHORT).show();
-            check = -1;
-        }
+//        if(!Pattern.matches("[0-9]+",canNang)){
+//            Toast.makeText(getContext(), "Bạn phải nhập số", Toast.LENGTH_SHORT).show();
+//            check = -1;
+        //}
 
         return check;
     }
